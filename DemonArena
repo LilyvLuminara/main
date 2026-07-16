@@ -1,6 +1,6 @@
 -- =====================================
 --   DEMON ARENA - LILYVREDHAWK
---   BY LILYEYES - SIMPLE RED GUI
+--   BY LILYEYES - MOBILE FRIENDLY GUI
 -- =====================================
 
 local replicatedStorage = game:GetService("ReplicatedStorage")
@@ -254,67 +254,102 @@ local function stopLoop()
     unequipTrain()
 end
 
--- ========== GUI SIMPLE ==========
+-- ========== GUI MOBILE FRIENDLY ==========
 local gui = Instance.new("ScreenGui")
 gui.Name = "LilyVRedHawk"
 gui.Parent = player:WaitForChild("PlayerGui")
 gui.ResetOnSpawn = false
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+-- Main Frame dengan ukuran lebih besar untuk mobile
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 200, 0, 260)
-mainFrame.Position = UDim2.new(0.5, -100, 0.5, -130)
-mainFrame.BackgroundColor3 = Color3.fromRGB(5, 0, 0)
-mainFrame.BackgroundTransparency = 0.05
+mainFrame.Size = UDim2.new(0, 280, 0, 370)
+mainFrame.Position = UDim2.new(0.5, -140, 0.5, -185)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10, 0, 10)
+mainFrame.BackgroundTransparency = 0.08
 mainFrame.BorderSizePixel = 2
-mainFrame.BorderColor3 = Color3.fromRGB(200, 0, 0)
+mainFrame.BorderColor3 = Color3.fromRGB(200, 0, 50)
 mainFrame.ClipsDescendants = true
 mainFrame.Parent = gui
 
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 4)
+corner.CornerRadius = UDim.new(0, 8)
 corner.Parent = mainFrame
 
 -- Glow
 local glow = Instance.new("Frame")
-glow.Size = UDim2.new(1, 6, 1, 6)
-glow.Position = UDim2.new(0, -3, 0, -3)
-glow.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-glow.BackgroundTransparency = 0.85
+glow.Size = UDim2.new(1, 10, 1, 10)
+glow.Position = UDim2.new(0, -5, 0, -5)
+glow.BackgroundColor3 = Color3.fromRGB(255, 0, 50)
+glow.BackgroundTransparency = 0.9
 glow.BorderSizePixel = 0
 glow.Parent = mainFrame
 
--- Header
+local glowCorner = Instance.new("UICorner")
+glowCorner.CornerRadius = UDim.new(0, 10)
+glowCorner.Parent = glow
+
+-- Header (lebih tinggi untuk mobile)
 local header = Instance.new("Frame")
-header.Size = UDim2.new(1, 0, 0, 35)
-header.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
-header.BackgroundTransparency = 0.15
+header.Size = UDim2.new(1, 0, 0, 45)
+header.BackgroundColor3 = Color3.fromRGB(200, 0, 30)
+header.BackgroundTransparency = 0.1
 header.BorderSizePixel = 0
 header.Parent = mainFrame
 
 local titleLogo = Instance.new("TextLabel")
-titleLogo.Size = UDim2.new(1, -35, 1, 0)
-titleLogo.Position = UDim2.new(0, 5, 0, 0)
+titleLogo.Size = UDim2.new(1, -80, 1, 0)
+titleLogo.Position = UDim2.new(0, 10, 0, 0)
 titleLogo.Text = "✦ LilyVRedHawk ✦"
-titleLogo.TextColor3 = Color3.fromRGB(255, 0, 0)
+titleLogo.TextColor3 = Color3.fromRGB(255, 50, 50)
 titleLogo.BackgroundTransparency = 1
 titleLogo.Font = Enum.Font.GothamBold
-titleLogo.TextSize = 14
+titleLogo.TextSize = 16
 titleLogo.TextScaled = true
 titleLogo.Parent = header
 
--- Close
+-- Button container di header
+local headerBtns = Instance.new("Frame")
+headerBtns.Size = UDim2.new(0, 60, 1, 0)
+headerBtns.Position = UDim2.new(1, -65, 0, 0)
+headerBtns.BackgroundTransparency = 1
+headerBtns.Parent = header
+
+-- Minimize Button
+local minBtn = Instance.new("TextButton")
+minBtn.Size = UDim2.new(0, 25, 0, 25)
+minBtn.Position = UDim2.new(0, 0, 0.5, -12.5)
+minBtn.Text = "─"
+minBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 30)
+minBtn.BackgroundTransparency = 0.3
+minBtn.Font = Enum.Font.GothamBold
+minBtn.TextSize = 16
+minBtn.BorderSizePixel = 1
+minBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+minBtn.Parent = headerBtns
+
+local minCorner = Instance.new("UICorner")
+minCorner.CornerRadius = UDim.new(0, 4)
+minCorner.Parent = minBtn
+
+-- Close Button
 local closeBtn = Instance.new("TextButton")
-closeBtn.Size = UDim2.new(0, 18, 0, 18)
-closeBtn.Position = UDim2.new(1, -22, 0, 8)
+closeBtn.Size = UDim2.new(0, 25, 0, 25)
+closeBtn.Position = UDim2.new(1, -25, 0.5, -12.5)
 closeBtn.Text = "✕"
 closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-closeBtn.BackgroundTransparency = 0.5
+closeBtn.BackgroundTransparency = 0.3
 closeBtn.Font = Enum.Font.GothamBold
-closeBtn.TextSize = 10
-closeBtn.BorderSizePixel = 0
-closeBtn.Parent = header
+closeBtn.TextSize = 14
+closeBtn.BorderSizePixel = 1
+closeBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+closeBtn.Parent = headerBtns
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 4)
+closeCorner.Parent = closeBtn
 
 closeBtn.MouseButton1Click:Connect(function()
     stopLoop()
@@ -322,23 +357,10 @@ closeBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
--- Minimize Button
-local minBtn = Instance.new("TextButton")
-minBtn.Size = UDim2.new(0, 18, 0, 18)
-minBtn.Position = UDim2.new(1, -42, 0, 8)
-minBtn.Text = "─"
-minBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
-minBtn.BackgroundTransparency = 0.5
-minBtn.Font = Enum.Font.GothamBold
-minBtn.TextSize = 12
-minBtn.BorderSizePixel = 0
-minBtn.Parent = header
-
--- Content Frame (untuk minimize)
+-- Content Frame
 local contentFrame = Instance.new("Frame")
-contentFrame.Size = UDim2.new(1, 0, 1, -35)
-contentFrame.Position = UDim2.new(0, 0, 0, 35)
+contentFrame.Size = UDim2.new(1, 0, 1, -45)
+contentFrame.Position = UDim2.new(0, 0, 0, 45)
 contentFrame.BackgroundTransparency = 1
 contentFrame.Parent = mainFrame
 
@@ -346,220 +368,257 @@ contentFrame.Parent = mainFrame
 local div = Instance.new("Frame")
 div.Size = UDim2.new(0.9, 0, 0, 1)
 div.Position = UDim2.new(0.05, 0, 0, 0)
-div.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-div.BackgroundTransparency = 0.5
+div.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+div.BackgroundTransparency = 0.3
 div.BorderSizePixel = 0
 div.Parent = contentFrame
 
--- Status
+-- Status Row
+local statusRow = Instance.new("Frame")
+statusRow.Size = UDim2.new(1, -20, 0, 30)
+statusRow.Position = UDim2.new(0, 10, 0, 5)
+statusRow.BackgroundTransparency = 1
+statusRow.Parent = contentFrame
+
 local statusLabel = Instance.new("TextLabel")
-statusLabel.Size = UDim2.new(0.5, 0, 0, 20)
-statusLabel.Position = UDim2.new(0, 0, 0, 5)
-statusLabel.Text = "OFF"
+statusLabel.Size = UDim2.new(0.5, 0, 1, 0)
+statusLabel.Position = UDim2.new(0, 0, 0, 0)
+statusLabel.Text = "● OFF"
 statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
 statusLabel.BackgroundTransparency = 1
 statusLabel.Font = Enum.Font.GothamBold
-statusLabel.TextSize = 11
+statusLabel.TextSize = 14
 statusLabel.TextXAlignment = Enum.TextXAlignment.Left
-statusLabel.Parent = contentFrame
+statusLabel.Parent = statusRow
 
 local speedLabel = Instance.new("TextLabel")
-speedLabel.Size = UDim2.new(0.5, 0, 0, 20)
-speedLabel.Position = UDim2.new(0.5, 0, 0, 5)
-speedLabel.Text = "x7"
-speedLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+speedLabel.Size = UDim2.new(0.5, 0, 1, 0)
+speedLabel.Position = UDim2.new(0.5, 0, 0, 0)
+speedLabel.Text = "⚡ x7"
+speedLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
 speedLabel.BackgroundTransparency = 1
 speedLabel.Font = Enum.Font.GothamBold
-speedLabel.TextSize = 11
+speedLabel.TextSize = 14
 speedLabel.TextXAlignment = Enum.TextXAlignment.Right
-speedLabel.Parent = contentFrame
+speedLabel.Parent = statusRow
 
--- START
+-- Main Buttons
+local btnRow1 = Instance.new("Frame")
+btnRow1.Size = UDim2.new(1, -20, 0, 40)
+btnRow1.Position = UDim2.new(0, 10, 0, 40)
+btnRow1.BackgroundTransparency = 1
+btnRow1.Parent = contentFrame
+
+-- START Button
 local startBtn = Instance.new("TextButton")
-startBtn.Size = UDim2.new(0.9, 0, 0, 28)
-startBtn.Position = UDim2.new(0.05, 0, 0, 30)
+startBtn.Size = UDim2.new(0.47, 0, 1, 0)
+startBtn.Position = UDim2.new(0, 0, 0, 0)
 startBtn.Text = "▶ START"
 startBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 30)
 startBtn.Font = Enum.Font.GothamBold
-startBtn.TextSize = 11
+startBtn.TextSize = 14
 startBtn.BorderSizePixel = 2
-startBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-startBtn.Parent = contentFrame
+startBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+startBtn.Parent = btnRow1
 
 local startCorner = Instance.new("UICorner")
-startCorner.CornerRadius = UDim.new(0, 4)
+startCorner.CornerRadius = UDim.new(0, 6)
 startCorner.Parent = startBtn
 
--- BYPASS
+-- BYPASS Button
 local bypassBtn = Instance.new("TextButton")
-bypassBtn.Size = UDim2.new(0.43, 0, 0, 25)
-bypassBtn.Position = UDim2.new(0.05, 0, 0, 63)
+bypassBtn.Size = UDim2.new(0.47, 0, 1, 0)
+bypassBtn.Position = UDim2.new(0.53, 0, 0, 0)
 bypassBtn.Text = "💀 BYPASS"
 bypassBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
+bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 30)
 bypassBtn.Font = Enum.Font.GothamBold
-bypassBtn.TextSize = 10
+bypassBtn.TextSize = 12
 bypassBtn.BorderSizePixel = 2
-bypassBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-bypassBtn.Parent = contentFrame
+bypassBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+bypassBtn.Parent = btnRow1
 
 local bypassCorner = Instance.new("UICorner")
-bypassCorner.CornerRadius = UDim.new(0, 4)
+bypassCorner.CornerRadius = UDim.new(0, 6)
 bypassCorner.Parent = bypassBtn
 
--- UNEQUIP
+-- Button Row 2
+local btnRow2 = Instance.new("Frame")
+btnRow2.Size = UDim2.new(1, -20, 0, 40)
+btnRow2.Position = UDim2.new(0, 10, 0, 85)
+btnRow2.BackgroundTransparency = 1
+btnRow2.Parent = contentFrame
+
+-- UNEQUIP Button
 local unequipBtn = Instance.new("TextButton")
-unequipBtn.Size = UDim2.new(0.43, 0, 0, 25)
-unequipBtn.Position = UDim2.new(0.52, 0, 0, 63)
-unequipBtn.Text = "⏹ UNEQ"
+unequipBtn.Size = UDim2.new(0.47, 0, 1, 0)
+unequipBtn.Position = UDim2.new(0, 0, 0, 0)
+unequipBtn.Text = "⏹ UNEQUIP"
 unequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 unequipBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 0)
 unequipBtn.Font = Enum.Font.GothamBold
-unequipBtn.TextSize = 10
+unequipBtn.TextSize = 12
 unequipBtn.BorderSizePixel = 2
 unequipBtn.BorderColor3 = Color3.fromRGB(255, 100, 0)
-unequipBtn.Parent = contentFrame
+unequipBtn.Parent = btnRow2
 
 local unequipCorner = Instance.new("UICorner")
-unequipCorner.CornerRadius = UDim.new(0, 4)
+unequipCorner.CornerRadius = UDim.new(0, 6)
 unequipCorner.Parent = unequipBtn
 
--- EQUIP
+-- AUTO UNEQUIP Button
+local autoUnequipBtn = Instance.new("TextButton")
+autoUnequipBtn.Size = UDim2.new(0.47, 0, 1, 0)
+autoUnequipBtn.Position = UDim2.new(0.53, 0, 0, 0)
+autoUnequipBtn.Text = "🔓 AUTO"
+autoUnequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 30)
+autoUnequipBtn.Font = Enum.Font.GothamBold
+autoUnequipBtn.TextSize = 12
+autoUnequipBtn.BorderSizePixel = 2
+autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+autoUnequipBtn.Parent = btnRow2
+
+local autoCorner = Instance.new("UICorner")
+autoCorner.CornerRadius = UDim.new(0, 6)
+autoCorner.Parent = autoUnequipBtn
+
+-- Equip Label
 local equipLabel = Instance.new("TextLabel")
-equipLabel.Size = UDim2.new(0.1, 0, 0, 20)
-equipLabel.Position = UDim2.new(0.05, 0, 0, 93)
-equipLabel.Text = "EQ:"
-equipLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
+equipLabel.Size = UDim2.new(1, -20, 0, 25)
+equipLabel.Position = UDim2.new(0, 10, 0, 130)
+equipLabel.Text = "EQUIP METHOD:"
+equipLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 equipLabel.BackgroundTransparency = 1
 equipLabel.Font = Enum.Font.GothamBold
-equipLabel.TextSize = 10
+equipLabel.TextSize = 12
+equipLabel.TextXAlignment = Enum.TextXAlignment.Left
 equipLabel.Parent = contentFrame
+
+-- Equip Buttons
+local equipRow = Instance.new("Frame")
+equipRow.Size = UDim2.new(1, -20, 0, 40)
+equipRow.Position = UDim2.new(0, 10, 0, 158)
+equipRow.BackgroundTransparency = 1
+equipRow.Parent = contentFrame
 
 local equipBtns = {}
 local equipIds = {5, 6, 7, 8}
 for i, id in pairs(equipIds) do
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0.18, 0, 0, 24)
-    btn.Position = UDim2.new(0.14 + (i-1) * 0.2, 0, 0, 91)
+    local spacing = 0.22
+    local startPos = 0.06
+    btn.Size = UDim2.new(0.2, 0, 1, 0)
+    btn.Position = UDim2.new(startPos + (i-1) * spacing, 0, 0, 0)
     btn.Text = tostring(id)
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    btn.BackgroundColor3 = Color3.fromRGB(80, 0, 0)
-    btn.BackgroundTransparency = 0.3
+    btn.BackgroundColor3 = Color3.fromRGB(80, 0, 30)
+    btn.BackgroundTransparency = 0.2
     btn.Font = Enum.Font.GothamBold
-    btn.TextSize = 11
+    btn.TextSize = 16
     btn.BorderSizePixel = 2
-    btn.BorderColor3 = Color3.fromRGB(200, 0, 0)
-    btn.Parent = contentFrame
+    btn.BorderColor3 = Color3.fromRGB(200, 50, 50)
+    btn.Parent = equipRow
     
     local btnCorner = Instance.new("UICorner")
-    btnCorner.CornerRadius = UDim.new(0, 4)
+    btnCorner.CornerRadius = UDim.new(0, 6)
     btnCorner.Parent = btn
     
     equipBtns[id] = btn
 end
 
+-- Utility Buttons Row
+local utilRow = Instance.new("Frame")
+utilRow.Size = UDim2.new(1, -20, 0, 35)
+utilRow.Position = UDim2.new(0, 10, 0, 203)
+utilRow.BackgroundTransparency = 1
+utilRow.Parent = contentFrame
+
 -- REFRESH
 local refreshBtn = Instance.new("TextButton")
-refreshBtn.Size = UDim2.new(0.28, 0, 0, 22)
-refreshBtn.Position = UDim2.new(0.05, 0, 0, 121)
+refreshBtn.Size = UDim2.new(0.3, 0, 1, 0)
+refreshBtn.Position = UDim2.new(0, 0, 0, 0)
 refreshBtn.Text = "🔄 REF"
 refreshBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 refreshBtn.BackgroundColor3 = Color3.fromRGB(80, 0, 80)
 refreshBtn.Font = Enum.Font.GothamBold
-refreshBtn.TextSize = 9
+refreshBtn.TextSize = 11
 refreshBtn.BorderSizePixel = 2
-refreshBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
-refreshBtn.Parent = contentFrame
+refreshBtn.BorderColor3 = Color3.fromRGB(200, 50, 200)
+refreshBtn.Parent = utilRow
 
 local refreshCorner = Instance.new("UICorner")
-refreshCorner.CornerRadius = UDim.new(0, 4)
+refreshCorner.CornerRadius = UDim.new(0, 6)
 refreshCorner.Parent = refreshBtn
 
 -- MEMORY
 local memBtn = Instance.new("TextButton")
-memBtn.Size = UDim2.new(0.28, 0, 0, 22)
-memBtn.Position = UDim2.new(0.36, 0, 0, 121)
+memBtn.Size = UDim2.new(0.3, 0, 1, 0)
+memBtn.Position = UDim2.new(0.35, 0, 0, 0)
 memBtn.Text = "🧹 MEM"
 memBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 memBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 100)
 memBtn.Font = Enum.Font.GothamBold
-memBtn.TextSize = 9
+memBtn.TextSize = 11
 memBtn.BorderSizePixel = 2
-memBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
-memBtn.Parent = contentFrame
+memBtn.BorderColor3 = Color3.fromRGB(200, 50, 200)
+memBtn.Parent = utilRow
 
 local memCorner = Instance.new("UICorner")
-memCorner.CornerRadius = UDim.new(0, 4)
+memCorner.CornerRadius = UDim.new(0, 6)
 memCorner.Parent = memBtn
-
--- AUTO UNEQUIP
-local autoUnequipBtn = Instance.new("TextButton")
-autoUnequipBtn.Size = UDim2.new(0.28, 0, 0, 22)
-autoUnequipBtn.Position = UDim2.new(0.67, 0, 0, 121)
-autoUnequipBtn.Text = "🔓 AUTO"
-autoUnequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
-autoUnequipBtn.Font = Enum.Font.GothamBold
-autoUnequipBtn.TextSize = 8
-autoUnequipBtn.BorderSizePixel = 2
-autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-autoUnequipBtn.Parent = contentFrame
-
-local autoCorner = Instance.new("UICorner")
-autoCorner.CornerRadius = UDim.new(0, 4)
-autoCorner.Parent = autoUnequipBtn
-
--- LEAVE
-local leaveBtn = Instance.new("TextButton")
-leaveBtn.Size = UDim2.new(0.43, 0, 0, 22)
-leaveBtn.Position = UDim2.new(0.05, 0, 0, 148)
-leaveBtn.Text = "🚪 LEAVE"
-leaveBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-leaveBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
-leaveBtn.Font = Enum.Font.GothamBold
-leaveBtn.TextSize = 9
-leaveBtn.BorderSizePixel = 2
-leaveBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-leaveBtn.Parent = contentFrame
-
-local leaveCorner = Instance.new("UICorner")
-leaveCorner.CornerRadius = UDim.new(0, 4)
-leaveCorner.Parent = leaveBtn
 
 -- REJOIN
 local rejoinBtn = Instance.new("TextButton")
-rejoinBtn.Size = UDim2.new(0.43, 0, 0, 22)
-rejoinBtn.Position = UDim2.new(0.52, 0, 0, 148)
+rejoinBtn.Size = UDim2.new(0.3, 0, 1, 0)
+rejoinBtn.Position = UDim2.new(0.7, 0, 0, 0)
 rejoinBtn.Text = "🔄 REJOIN"
 rejoinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 rejoinBtn.BackgroundColor3 = Color3.fromRGB(0, 50, 100)
 rejoinBtn.Font = Enum.Font.GothamBold
-rejoinBtn.TextSize = 9
+rejoinBtn.TextSize = 10
 rejoinBtn.BorderSizePixel = 2
-rejoinBtn.BorderColor3 = Color3.fromRGB(0, 100, 200)
-rejoinBtn.Parent = contentFrame
+rejoinBtn.BorderColor3 = Color3.fromRGB(50, 150, 255)
+rejoinBtn.Parent = utilRow
 
 local rejoinCorner = Instance.new("UICorner")
-rejoinCorner.CornerRadius = UDim.new(0, 4)
+rejoinCorner.CornerRadius = UDim.new(0, 6)
 rejoinCorner.Parent = rejoinBtn
+
+-- LEAVE Button
+local leaveBtn = Instance.new("TextButton")
+leaveBtn.Size = UDim2.new(0.47, 0, 0, 35)
+leaveBtn.Position = UDim2.new(0.265, 0, 0, 243)
+leaveBtn.Text = "🚪 LEAVE"
+leaveBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+leaveBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+leaveBtn.Font = Enum.Font.GothamBold
+leaveBtn.TextSize = 12
+leaveBtn.BorderSizePixel = 2
+leaveBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
+leaveBtn.Parent = contentFrame
+
+local leaveCorner = Instance.new("UICorner")
+leaveCorner.CornerRadius = UDim.new(0, 6)
+leaveCorner.Parent = leaveBtn
 
 -- Footer
 local footer = Instance.new("Frame")
-footer.Size = UDim2.new(1, 0, 0, 20)
-footer.Position = UDim2.new(0, 0, 0, 177)
-footer.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
-footer.BackgroundTransparency = 0.2
+footer.Size = UDim2.new(1, 0, 0, 25)
+footer.Position = UDim2.new(0, 0, 0, 283)
+footer.BackgroundColor3 = Color3.fromRGB(200, 0, 30)
+footer.BackgroundTransparency = 0.15
 footer.BorderSizePixel = 0
 footer.Parent = contentFrame
 
 local footerLabel = Instance.new("TextLabel")
 footerLabel.Size = UDim2.new(1, 0, 1, 0)
-footerLabel.Text = "✦ LilyVRedHawk ✦"
+footerLabel.Text = "✦ LilyVRedHawk • Demon Arena ✦"
 footerLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 footerLabel.BackgroundTransparency = 1
 footerLabel.Font = Enum.Font.Gotham
-footerLabel.TextSize = 9
+footerLabel.TextSize = 11
 footerLabel.Parent = footer
 
 -- ========== MINIMIZE FUNCTION ==========
@@ -570,20 +629,20 @@ minBtn.MouseButton1Click:Connect(function()
     isMinimized = not isMinimized
     
     if isMinimized then
-        -- Minimize: change button to maximize symbol and shrink GUI
         minBtn.Text = "□"
-        minBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+        minBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 50)
+        minBtn.BorderColor3 = Color3.fromRGB(50, 255, 50)
         
         local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-        local targetSize = UDim2.new(0, 200, 0, 35) -- Only header height
+        local targetSize = UDim2.new(0, 280, 0, 45)
         local tween = tweenService:Create(mainFrame, tweenInfo, {Size = targetSize})
         tween:Play()
         
         contentFrame.Visible = false
     else
-        -- Maximize: restore to original size
         minBtn.Text = "─"
-        minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 30)
+        minBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
         
         contentFrame.Visible = true
         local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
@@ -592,54 +651,68 @@ minBtn.MouseButton1Click:Connect(function()
     end
 end)
 
--- ========== DRAG ==========
+-- ========== DRAG UNTUK MOBILE & PC ==========
 local dragging = false
-local dragInput, dragStart, startPos
+local dragStartPos = nil
+local dragStartMousePos = nil
+
+local function startDrag(input)
+    dragging = true
+    dragStartPos = mainFrame.Position
+    dragStartMousePos = input.Position
+end
 
 local function updateDrag(input)
-    if dragging and dragStart and startPos then
-        local delta = input.Position - dragStart
+    if dragging and dragStartPos and dragStartMousePos then
+        local delta = input.Position - dragStartMousePos
         mainFrame.Position = UDim2.new(
-            startPos.X.Scale, 
-            startPos.X.Offset + delta.X, 
-            startPos.Y.Scale, 
-            startPos.Y.Offset + delta.Y
+            dragStartPos.X.Scale,
+            dragStartPos.X.Offset + delta.X,
+            dragStartPos.Y.Scale,
+            dragStartPos.Y.Offset + delta.Y
         )
     end
 end
 
+local function endDrag()
+    dragging = false
+    dragStartPos = nil
+    dragStartMousePos = nil
+end
+
+-- Untuk PC (Mouse)
 header.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
+        startDrag(input)
     end
 end)
 
 header.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-
-userInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
         updateDrag(input)
     end
 end)
 
 userInputService.InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = false
+        endDrag()
     end
 end)
 
--- ========== FUNGSI ==========
+-- Untuk Mobile (Touch)
+header.TouchBegan:Connect(function(input)
+    startDrag(input)
+end)
+
+header.TouchMoved:Connect(function(input)
+    updateDrag(input)
+end)
+
+header.TouchEnded:Connect(function()
+    endDrag()
+end)
+
+-- ========== FUNGSI BUTTON ==========
 local active = false
 local autoUnequipEnabled = true
 
@@ -648,14 +721,14 @@ startBtn.MouseButton1Click:Connect(function()
     if active then
         startLoop()
         startBtn.Text = "⏹ STOP"
-        startBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
-        statusLabel.Text = "ON"
-        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+        startBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 20)
+        statusLabel.Text = "● ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
     else
         stopLoop()
         startBtn.Text = "▶ START"
-        startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
-        statusLabel.Text = "OFF"
+        startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 30)
+        statusLabel.Text = "● OFF"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
     end
 end)
@@ -665,11 +738,11 @@ bypassBtn.MouseButton1Click:Connect(function()
     if bypassActive then
         activateBypass(currentSpeed)
         bypassBtn.Text = "💀 ON"
-        bypassBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 30)
     else
         deactivateBypass()
         bypassBtn.Text = "💀 BYPASS"
-        bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 30)
     end
 end)
 
@@ -681,42 +754,54 @@ for id, btn in pairs(equipBtns) do
     btn.MouseButton1Click:Connect(function()
         cachedEquip(id)
         for _, b in pairs(equipBtns) do
-            b.BackgroundTransparency = 0.3
-            b.BorderColor3 = Color3.fromRGB(200, 0, 0)
+            b.BackgroundTransparency = 0.2
+            b.BorderColor3 = Color3.fromRGB(200, 50, 50)
+            b.TextColor3 = Color3.fromRGB(255, 255, 255)
         end
         btn.BackgroundTransparency = 0.1
         btn.BorderColor3 = Color3.fromRGB(255, 100, 100)
+        btn.TextColor3 = Color3.fromRGB(255, 200, 200)
     end)
 end
 
 refreshBtn.MouseButton1Click:Connect(function()
-    statusLabel.Text = "OK"
-    statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    statusLabel.Text = "● OK"
+    statusLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
     task.wait(0.2)
     if active then
-        statusLabel.Text = "ON"
-        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+        statusLabel.Text = "● ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
     else
-        statusLabel.Text = "OFF"
+        statusLabel.Text = "● OFF"
         statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
     end
 end)
 
 memBtn.MouseButton1Click:Connect(function()
     quickMemoryClean()
+    statusLabel.Text = "● CLEAN"
+    statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+    task.wait(0.3)
+    if active then
+        statusLabel.Text = "● ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
+    else
+        statusLabel.Text = "● OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
 end)
 
 autoUnequipBtn.MouseButton1Click:Connect(function()
     autoUnequipEnabled = not autoUnequipEnabled
     if autoUnequipEnabled then
         autoUnequipBtn.Text = "🔓 AUTO"
-        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
-        autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 30)
+        autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 50, 50)
         setupAutoUnequip()
     else
         autoUnequipBtn.Text = "🔒 AUTO"
-        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(30, 0, 0)
-        autoUnequipBtn.BorderColor3 = Color3.fromRGB(100, 0, 0)
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(30, 0, 10)
+        autoUnequipBtn.BorderColor3 = Color3.fromRGB(100, 30, 30)
         autoUnequipConnected = false
     end
 end)
