@@ -7,6 +7,7 @@ local replicatedStorage = game:GetService("ReplicatedStorage")
 local player = game:GetService("Players").LocalPlayer
 local runService = game:GetService("RunService")
 local userInputService = game:GetService("UserInputService")
+local tweenService = game:GetService("TweenService")
 
 -- ========== AMBIL REMOTE ==========
 local function findRemote(name)
@@ -292,7 +293,8 @@ header.BorderSizePixel = 0
 header.Parent = mainFrame
 
 local titleLogo = Instance.new("TextLabel")
-titleLogo.Size = UDim2.new(1, 0, 1, 0)
+titleLogo.Size = UDim2.new(1, -35, 1, 0)
+titleLogo.Position = UDim2.new(0, 5, 0, 0)
 titleLogo.Text = "✦ LilyVRedHawk ✦"
 titleLogo.TextColor3 = Color3.fromRGB(255, 0, 0)
 titleLogo.BackgroundTransparency = 1
@@ -320,42 +322,62 @@ closeBtn.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
+-- Minimize Button
+local minBtn = Instance.new("TextButton")
+minBtn.Size = UDim2.new(0, 18, 0, 18)
+minBtn.Position = UDim2.new(1, -42, 0, 8)
+minBtn.Text = "─"
+minBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+minBtn.BackgroundTransparency = 0.5
+minBtn.Font = Enum.Font.GothamBold
+minBtn.TextSize = 12
+minBtn.BorderSizePixel = 0
+minBtn.Parent = header
+
+-- Content Frame (untuk minimize)
+local contentFrame = Instance.new("Frame")
+contentFrame.Size = UDim2.new(1, 0, 1, -35)
+contentFrame.Position = UDim2.new(0, 0, 0, 35)
+contentFrame.BackgroundTransparency = 1
+contentFrame.Parent = mainFrame
+
 -- Divider
 local div = Instance.new("Frame")
 div.Size = UDim2.new(0.9, 0, 0, 1)
-div.Position = UDim2.new(0.05, 0, 0, 35)
+div.Position = UDim2.new(0.05, 0, 0, 0)
 div.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 div.BackgroundTransparency = 0.5
 div.BorderSizePixel = 0
-div.Parent = mainFrame
+div.Parent = contentFrame
 
 -- Status
 local statusLabel = Instance.new("TextLabel")
 statusLabel.Size = UDim2.new(0.5, 0, 0, 20)
-statusLabel.Position = UDim2.new(0, 0, 0, 40)
+statusLabel.Position = UDim2.new(0, 0, 0, 5)
 statusLabel.Text = "OFF"
 statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
 statusLabel.BackgroundTransparency = 1
 statusLabel.Font = Enum.Font.GothamBold
 statusLabel.TextSize = 11
 statusLabel.TextXAlignment = Enum.TextXAlignment.Left
-statusLabel.Parent = mainFrame
+statusLabel.Parent = contentFrame
 
 local speedLabel = Instance.new("TextLabel")
 speedLabel.Size = UDim2.new(0.5, 0, 0, 20)
-speedLabel.Position = UDim2.new(0.5, 0, 0, 40)
+speedLabel.Position = UDim2.new(0.5, 0, 0, 5)
 speedLabel.Text = "x7"
 speedLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 speedLabel.BackgroundTransparency = 1
 speedLabel.Font = Enum.Font.GothamBold
 speedLabel.TextSize = 11
 speedLabel.TextXAlignment = Enum.TextXAlignment.Right
-speedLabel.Parent = mainFrame
+speedLabel.Parent = contentFrame
 
 -- START
 local startBtn = Instance.new("TextButton")
 startBtn.Size = UDim2.new(0.9, 0, 0, 28)
-startBtn.Position = UDim2.new(0.05, 0, 0, 65)
+startBtn.Position = UDim2.new(0.05, 0, 0, 30)
 startBtn.Text = "▶ START"
 startBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
@@ -363,7 +385,7 @@ startBtn.Font = Enum.Font.GothamBold
 startBtn.TextSize = 11
 startBtn.BorderSizePixel = 2
 startBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-startBtn.Parent = mainFrame
+startBtn.Parent = contentFrame
 
 local startCorner = Instance.new("UICorner")
 startCorner.CornerRadius = UDim.new(0, 4)
@@ -372,7 +394,7 @@ startCorner.Parent = startBtn
 -- BYPASS
 local bypassBtn = Instance.new("TextButton")
 bypassBtn.Size = UDim2.new(0.43, 0, 0, 25)
-bypassBtn.Position = UDim2.new(0.05, 0, 0, 98)
+bypassBtn.Position = UDim2.new(0.05, 0, 0, 63)
 bypassBtn.Text = "💀 BYPASS"
 bypassBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
@@ -380,7 +402,7 @@ bypassBtn.Font = Enum.Font.GothamBold
 bypassBtn.TextSize = 10
 bypassBtn.BorderSizePixel = 2
 bypassBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-bypassBtn.Parent = mainFrame
+bypassBtn.Parent = contentFrame
 
 local bypassCorner = Instance.new("UICorner")
 bypassCorner.CornerRadius = UDim.new(0, 4)
@@ -389,7 +411,7 @@ bypassCorner.Parent = bypassBtn
 -- UNEQUIP
 local unequipBtn = Instance.new("TextButton")
 unequipBtn.Size = UDim2.new(0.43, 0, 0, 25)
-unequipBtn.Position = UDim2.new(0.52, 0, 0, 98)
+unequipBtn.Position = UDim2.new(0.52, 0, 0, 63)
 unequipBtn.Text = "⏹ UNEQ"
 unequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 unequipBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 0)
@@ -397,7 +419,7 @@ unequipBtn.Font = Enum.Font.GothamBold
 unequipBtn.TextSize = 10
 unequipBtn.BorderSizePixel = 2
 unequipBtn.BorderColor3 = Color3.fromRGB(255, 100, 0)
-unequipBtn.Parent = mainFrame
+unequipBtn.Parent = contentFrame
 
 local unequipCorner = Instance.new("UICorner")
 unequipCorner.CornerRadius = UDim.new(0, 4)
@@ -406,20 +428,20 @@ unequipCorner.Parent = unequipBtn
 -- EQUIP
 local equipLabel = Instance.new("TextLabel")
 equipLabel.Size = UDim2.new(0.1, 0, 0, 20)
-equipLabel.Position = UDim2.new(0.05, 0, 0, 128)
+equipLabel.Position = UDim2.new(0.05, 0, 0, 93)
 equipLabel.Text = "EQ:"
 equipLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
 equipLabel.BackgroundTransparency = 1
 equipLabel.Font = Enum.Font.GothamBold
 equipLabel.TextSize = 10
-equipLabel.Parent = mainFrame
+equipLabel.Parent = contentFrame
 
 local equipBtns = {}
 local equipIds = {5, 6, 7, 8}
 for i, id in pairs(equipIds) do
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(0.18, 0, 0, 24)
-    btn.Position = UDim2.new(0.14 + (i-1) * 0.2, 0, 0, 126)
+    btn.Position = UDim2.new(0.14 + (i-1) * 0.2, 0, 0, 91)
     btn.Text = tostring(id)
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
     btn.BackgroundColor3 = Color3.fromRGB(80, 0, 0)
@@ -428,7 +450,7 @@ for i, id in pairs(equipIds) do
     btn.TextSize = 11
     btn.BorderSizePixel = 2
     btn.BorderColor3 = Color3.fromRGB(200, 0, 0)
-    btn.Parent = mainFrame
+    btn.Parent = contentFrame
     
     local btnCorner = Instance.new("UICorner")
     btnCorner.CornerRadius = UDim.new(0, 4)
@@ -440,7 +462,7 @@ end
 -- REFRESH
 local refreshBtn = Instance.new("TextButton")
 refreshBtn.Size = UDim2.new(0.28, 0, 0, 22)
-refreshBtn.Position = UDim2.new(0.05, 0, 0, 156)
+refreshBtn.Position = UDim2.new(0.05, 0, 0, 121)
 refreshBtn.Text = "🔄 REF"
 refreshBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 refreshBtn.BackgroundColor3 = Color3.fromRGB(80, 0, 80)
@@ -448,7 +470,7 @@ refreshBtn.Font = Enum.Font.GothamBold
 refreshBtn.TextSize = 9
 refreshBtn.BorderSizePixel = 2
 refreshBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
-refreshBtn.Parent = mainFrame
+refreshBtn.Parent = contentFrame
 
 local refreshCorner = Instance.new("UICorner")
 refreshCorner.CornerRadius = UDim.new(0, 4)
@@ -457,7 +479,7 @@ refreshCorner.Parent = refreshBtn
 -- MEMORY
 local memBtn = Instance.new("TextButton")
 memBtn.Size = UDim2.new(0.28, 0, 0, 22)
-memBtn.Position = UDim2.new(0.36, 0, 0, 156)
+memBtn.Position = UDim2.new(0.36, 0, 0, 121)
 memBtn.Text = "🧹 MEM"
 memBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 memBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 100)
@@ -465,7 +487,7 @@ memBtn.Font = Enum.Font.GothamBold
 memBtn.TextSize = 9
 memBtn.BorderSizePixel = 2
 memBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
-memBtn.Parent = mainFrame
+memBtn.Parent = contentFrame
 
 local memCorner = Instance.new("UICorner")
 memCorner.CornerRadius = UDim.new(0, 4)
@@ -474,7 +496,7 @@ memCorner.Parent = memBtn
 -- AUTO UNEQUIP
 local autoUnequipBtn = Instance.new("TextButton")
 autoUnequipBtn.Size = UDim2.new(0.28, 0, 0, 22)
-autoUnequipBtn.Position = UDim2.new(0.67, 0, 0, 156)
+autoUnequipBtn.Position = UDim2.new(0.67, 0, 0, 121)
 autoUnequipBtn.Text = "🔓 AUTO"
 autoUnequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
@@ -482,7 +504,7 @@ autoUnequipBtn.Font = Enum.Font.GothamBold
 autoUnequipBtn.TextSize = 8
 autoUnequipBtn.BorderSizePixel = 2
 autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-autoUnequipBtn.Parent = mainFrame
+autoUnequipBtn.Parent = contentFrame
 
 local autoCorner = Instance.new("UICorner")
 autoCorner.CornerRadius = UDim.new(0, 4)
@@ -491,7 +513,7 @@ autoCorner.Parent = autoUnequipBtn
 -- LEAVE
 local leaveBtn = Instance.new("TextButton")
 leaveBtn.Size = UDim2.new(0.43, 0, 0, 22)
-leaveBtn.Position = UDim2.new(0.05, 0, 0, 183)
+leaveBtn.Position = UDim2.new(0.05, 0, 0, 148)
 leaveBtn.Text = "🚪 LEAVE"
 leaveBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 leaveBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
@@ -499,7 +521,7 @@ leaveBtn.Font = Enum.Font.GothamBold
 leaveBtn.TextSize = 9
 leaveBtn.BorderSizePixel = 2
 leaveBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
-leaveBtn.Parent = mainFrame
+leaveBtn.Parent = contentFrame
 
 local leaveCorner = Instance.new("UICorner")
 leaveCorner.CornerRadius = UDim.new(0, 4)
@@ -508,7 +530,7 @@ leaveCorner.Parent = leaveBtn
 -- REJOIN
 local rejoinBtn = Instance.new("TextButton")
 rejoinBtn.Size = UDim2.new(0.43, 0, 0, 22)
-rejoinBtn.Position = UDim2.new(0.52, 0, 0, 183)
+rejoinBtn.Position = UDim2.new(0.52, 0, 0, 148)
 rejoinBtn.Text = "🔄 REJOIN"
 rejoinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 rejoinBtn.BackgroundColor3 = Color3.fromRGB(0, 50, 100)
@@ -516,7 +538,7 @@ rejoinBtn.Font = Enum.Font.GothamBold
 rejoinBtn.TextSize = 9
 rejoinBtn.BorderSizePixel = 2
 rejoinBtn.BorderColor3 = Color3.fromRGB(0, 100, 200)
-rejoinBtn.Parent = mainFrame
+rejoinBtn.Parent = contentFrame
 
 local rejoinCorner = Instance.new("UICorner")
 rejoinCorner.CornerRadius = UDim.new(0, 4)
@@ -525,11 +547,11 @@ rejoinCorner.Parent = rejoinBtn
 -- Footer
 local footer = Instance.new("Frame")
 footer.Size = UDim2.new(1, 0, 0, 20)
-footer.Position = UDim2.new(0, 0, 0, 212)
+footer.Position = UDim2.new(0, 0, 0, 177)
 footer.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
 footer.BackgroundTransparency = 0.2
 footer.BorderSizePixel = 0
-footer.Parent = mainFrame
+footer.Parent = contentFrame
 
 local footerLabel = Instance.new("TextLabel")
 footerLabel.Size = UDim2.new(1, 0, 1, 0)
@@ -540,15 +562,62 @@ footerLabel.Font = Enum.Font.Gotham
 footerLabel.TextSize = 9
 footerLabel.Parent = footer
 
+-- ========== MINIMIZE FUNCTION ==========
+local isMinimized = false
+local originalSize = mainFrame.Size
+
+minBtn.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    
+    if isMinimized then
+        -- Minimize: change button to maximize symbol and shrink GUI
+        minBtn.Text = "□"
+        minBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+        
+        local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local targetSize = UDim2.new(0, 200, 0, 35) -- Only header height
+        local tween = tweenService:Create(mainFrame, tweenInfo, {Size = targetSize})
+        tween:Play()
+        
+        contentFrame.Visible = false
+    else
+        -- Maximize: restore to original size
+        minBtn.Text = "─"
+        minBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        
+        contentFrame.Visible = true
+        local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local tween = tweenService:Create(mainFrame, tweenInfo, {Size = originalSize})
+        tween:Play()
+    end
+end)
+
 -- ========== DRAG ==========
 local dragging = false
 local dragInput, dragStart, startPos
+
+local function updateDrag(input)
+    if dragging and dragStart and startPos then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(
+            startPos.X.Scale, 
+            startPos.X.Offset + delta.X, 
+            startPos.Y.Scale, 
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end
 
 header.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = true
         dragStart = input.Position
         startPos = mainFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
     end
 end)
 
@@ -560,8 +629,7 @@ end)
 
 userInputService.InputChanged:Connect(function(input)
     if input == dragInput and dragging then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        updateDrag(input)
     end
 end)
 
