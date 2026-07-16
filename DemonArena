@@ -1,0 +1,670 @@
+-- =====================================
+--   DEMON ARENA - LILYVREDHAWK
+--   BY LILYEYES - SIMPLE RED GUI
+-- =====================================
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local player = game:GetService("Players").LocalPlayer
+local runService = game:GetService("RunService")
+local userInputService = game:GetService("UserInputService")
+
+-- ========== AMBIL REMOTE ==========
+local function findRemote(name)
+    for _, v in pairs(replicatedStorage:GetDescendants()) do
+        if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
+            if string.find(string.lower(v.Name), string.lower(name)) then
+                return v
+            end
+        end
+    end
+    return nil
+end
+
+local clickRemote = findRemote("ReqClickTrain")
+local speedRemote = findRemote("ReqUpdateTrainSpeed")
+local equipRemote = findRemote("ReqApplyEquipTrainMethod")
+local unequipRemote = findRemote("ReqApplyUnequipTrainMethod")
+
+-- ========== AMBIL MODULE ==========
+local trainModule = nil
+local function getTrainModule()
+    if trainModule then return trainModule end
+    local script = replicatedStorage:FindFirstChild("Script")
+    if script then
+        local train = script:FindFirstChild("TrainSystem")
+        if train then
+            local service = train:FindFirstChild("TrainSystemService")
+            if service then
+                local success, module = pcall(require, service)
+                if success then
+                    trainModule = module
+                    return module
+                end
+            end
+        end
+    end
+    return nil
+end
+trainModule = getTrainModule()
+
+-- ========== FUNGSI ==========
+local function cachedClick()
+    if clickRemote then
+        pcall(function()
+            if clickRemote:IsA("RemoteFunction") then
+                clickRemote:InvokeServer()
+            else
+                clickRemote:FireServer()
+            end
+        end)
+    end
+end
+
+local function cachedUpdateSpeed(speed)
+    if speedRemote then
+        pcall(function()
+            if speedRemote:IsA("RemoteFunction") then
+                speedRemote:InvokeServer(speed or 999)
+            else
+                speedRemote:FireServer(speed or 999)
+            end
+        end)
+    end
+end
+
+local function cachedEquip(methodId)
+    if equipRemote then
+        pcall(function()
+            if equipRemote:IsA("RemoteFunction") then
+                equipRemote:InvokeServer(methodId)
+            else
+                equipRemote:FireServer(methodId)
+            end
+        end)
+    end
+end
+
+local function cachedUnequip()
+    if unequipRemote then
+        pcall(function()
+            if unequipRemote:IsA("RemoteFunction") then
+                unequipRemote:InvokeServer()
+            else
+                unequipRemote:FireServer()
+            end
+        end)
+    end
+    if trainModule and trainModule.requestUnequipTrainMethod then
+        pcall(trainModule.requestUnequipTrainMethod)
+    end
+end
+
+local function unequipTrain()
+    cachedUnequip()
+    pcall(function()
+        local char = player.Character
+        if char then
+            local humanoid = char:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                local animator = humanoid:FindFirstChildOfClass("Animator")
+                if animator then
+                    for _, track in pairs(animator:GetPlayingAnimationTracks()) do
+                        track:Stop()
+                    end
+                end
+            end
+        end
+    end)
+end
+
+local autoUnequipConnected = false
+local function setupAutoUnequip()
+    if autoUnequipConnected then return end
+    pcall(function()
+        local char = player.Character or player.CharacterAdded:Wait()
+        local humanoid = char:WaitForChild("Humanoid")
+        humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+            if humanoid.MoveDirection.Magnitude > 0.1 then
+                unequipTrain()
+            end
+        end)
+        autoUnequipConnected = true
+    end)
+end
+
+local function quickMemoryClean()
+    pcall(function()
+        collectgarbage("collect")
+        collectgarbage("step")
+    end)
+end
+
+-- ========== BYPASS ==========
+local bypassActive = false
+local bypassConnection = nil
+local currentSpeed = 999
+local decayDisabled = false
+
+local function activateBypass(speed)
+    if not trainModule then return end
+    speed = speed or currentSpeed
+    currentSpeed = speed
+    
+    if trainModule.getClickTrainSpeed then
+        trainModule.getClickTrainSpeed = function() return speed end
+    end
+    
+    if trainModule.onClickAccelerate then
+        trainModule.onClickAccelerate = function()
+            local remote = replicatedStorage:FindFirstChild("Remote")
+            if remote then
+                local ts = remote:FindFirstChild("TrainSystem")
+                if ts then
+                    local update = ts:FindFirstChild("ReqUpdateTrainSpeed")
+                    if update then pcall(function() update:InvokeServer(speed) end) end
+                end
+            end
+        end
+    end
+    
+    local remote = replicatedStorage:FindFirstChild("Remote")
+    if remote then
+        local ts = remote:FindFirstChild("TrainSystem")
+        if ts then
+            local update = ts:FindFirstChild("ReqUpdateTrainSpeed")
+            if update then
+                local oldInvoke = update.InvokeServer
+                update.InvokeServer = function(self, spd)
+                    return oldInvoke(self, speed)
+                end
+            end
+        end
+    end
+    
+    if trainModule.startDecayCheck and not decayDisabled then
+        trainModule.startDecayCheck = function() return end
+        decayDisabled = true
+    end
+    
+    if not bypassConnection then
+        local remote = replicatedStorage:FindFirstChild("Remote")
+        if remote then
+            local ts = remote:FindFirstChild("TrainSystem")
+            if ts then
+                local update = ts:FindFirstChild("ReqUpdateTrainSpeed")
+                if update then
+                    bypassConnection = runService.Heartbeat:Connect(function()
+                        if bypassActive then
+                            pcall(function() update:InvokeServer(speed) end)
+                        end
+                    end)
+                end
+            end
+        end
+    end
+end
+
+local function deactivateBypass()
+    bypassActive = false
+    if bypassConnection then
+        bypassConnection:Disconnect()
+        bypassConnection = nil
+    end
+end
+
+-- ========== LOOP ==========
+local isRunning = false
+local loopConnection = nil
+local frameCount = 0
+
+local function startLoop()
+    if isRunning then return end
+    isRunning = true
+    
+    if not bypassActive then
+        bypassActive = true
+        activateBypass(currentSpeed)
+    end
+    
+    if autoUnequipEnabled then
+        setupAutoUnequip()
+    end
+    
+    loopConnection = runService.Heartbeat:Connect(function()
+        if isRunning then
+            frameCount = frameCount + 1
+            for i = 1, 10 do
+                cachedClick()
+            end
+            cachedUpdateSpeed(currentSpeed)
+            if frameCount % 100 == 0 then
+                quickMemoryClean()
+            end
+        end
+    end)
+end
+
+local function stopLoop()
+    isRunning = false
+    if loopConnection then
+        loopConnection:Disconnect()
+        loopConnection = nil
+    end
+    unequipTrain()
+end
+
+-- ========== GUI SIMPLE ==========
+local gui = Instance.new("ScreenGui")
+gui.Name = "LilyVRedHawk"
+gui.Parent = player:WaitForChild("PlayerGui")
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 200, 0, 260)
+mainFrame.Position = UDim2.new(0.5, -100, 0.5, -130)
+mainFrame.BackgroundColor3 = Color3.fromRGB(5, 0, 0)
+mainFrame.BackgroundTransparency = 0.05
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(200, 0, 0)
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 4)
+corner.Parent = mainFrame
+
+-- Glow
+local glow = Instance.new("Frame")
+glow.Size = UDim2.new(1, 6, 1, 6)
+glow.Position = UDim2.new(0, -3, 0, -3)
+glow.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+glow.BackgroundTransparency = 0.85
+glow.BorderSizePixel = 0
+glow.Parent = mainFrame
+
+-- Header
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, 0, 0, 35)
+header.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+header.BackgroundTransparency = 0.15
+header.BorderSizePixel = 0
+header.Parent = mainFrame
+
+local titleLogo = Instance.new("TextLabel")
+titleLogo.Size = UDim2.new(1, 0, 1, 0)
+titleLogo.Text = "✦ LilyVRedHawk ✦"
+titleLogo.TextColor3 = Color3.fromRGB(255, 0, 0)
+titleLogo.BackgroundTransparency = 1
+titleLogo.Font = Enum.Font.GothamBold
+titleLogo.TextSize = 14
+titleLogo.TextScaled = true
+titleLogo.Parent = header
+
+-- Close
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 18, 0, 18)
+closeBtn.Position = UDim2.new(1, -22, 0, 8)
+closeBtn.Text = "✕"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+closeBtn.BackgroundTransparency = 0.5
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 10
+closeBtn.BorderSizePixel = 0
+closeBtn.Parent = header
+
+closeBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    deactivateBypass()
+    gui:Destroy()
+end)
+
+-- Divider
+local div = Instance.new("Frame")
+div.Size = UDim2.new(0.9, 0, 0, 1)
+div.Position = UDim2.new(0.05, 0, 0, 35)
+div.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+div.BackgroundTransparency = 0.5
+div.BorderSizePixel = 0
+div.Parent = mainFrame
+
+-- Status
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(0.5, 0, 0, 20)
+statusLabel.Position = UDim2.new(0, 0, 0, 40)
+statusLabel.Text = "OFF"
+statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 11
+statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+statusLabel.Parent = mainFrame
+
+local speedLabel = Instance.new("TextLabel")
+speedLabel.Size = UDim2.new(0.5, 0, 0, 20)
+speedLabel.Position = UDim2.new(0.5, 0, 0, 40)
+speedLabel.Text = "x7"
+speedLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+speedLabel.BackgroundTransparency = 1
+speedLabel.Font = Enum.Font.GothamBold
+speedLabel.TextSize = 11
+speedLabel.TextXAlignment = Enum.TextXAlignment.Right
+speedLabel.Parent = mainFrame
+
+-- START
+local startBtn = Instance.new("TextButton")
+startBtn.Size = UDim2.new(0.9, 0, 0, 28)
+startBtn.Position = UDim2.new(0.05, 0, 0, 65)
+startBtn.Text = "▶ START"
+startBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+startBtn.Font = Enum.Font.GothamBold
+startBtn.TextSize = 11
+startBtn.BorderSizePixel = 2
+startBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+startBtn.Parent = mainFrame
+
+local startCorner = Instance.new("UICorner")
+startCorner.CornerRadius = UDim.new(0, 4)
+startCorner.Parent = startBtn
+
+-- BYPASS
+local bypassBtn = Instance.new("TextButton")
+bypassBtn.Size = UDim2.new(0.43, 0, 0, 25)
+bypassBtn.Position = UDim2.new(0.05, 0, 0, 98)
+bypassBtn.Text = "💀 BYPASS"
+bypassBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
+bypassBtn.Font = Enum.Font.GothamBold
+bypassBtn.TextSize = 10
+bypassBtn.BorderSizePixel = 2
+bypassBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+bypassBtn.Parent = mainFrame
+
+local bypassCorner = Instance.new("UICorner")
+bypassCorner.CornerRadius = UDim.new(0, 4)
+bypassCorner.Parent = bypassBtn
+
+-- UNEQUIP
+local unequipBtn = Instance.new("TextButton")
+unequipBtn.Size = UDim2.new(0.43, 0, 0, 25)
+unequipBtn.Position = UDim2.new(0.52, 0, 0, 98)
+unequipBtn.Text = "⏹ UNEQ"
+unequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+unequipBtn.BackgroundColor3 = Color3.fromRGB(150, 50, 0)
+unequipBtn.Font = Enum.Font.GothamBold
+unequipBtn.TextSize = 10
+unequipBtn.BorderSizePixel = 2
+unequipBtn.BorderColor3 = Color3.fromRGB(255, 100, 0)
+unequipBtn.Parent = mainFrame
+
+local unequipCorner = Instance.new("UICorner")
+unequipCorner.CornerRadius = UDim.new(0, 4)
+unequipCorner.Parent = unequipBtn
+
+-- EQUIP
+local equipLabel = Instance.new("TextLabel")
+equipLabel.Size = UDim2.new(0.1, 0, 0, 20)
+equipLabel.Position = UDim2.new(0.05, 0, 0, 128)
+equipLabel.Text = "EQ:"
+equipLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
+equipLabel.BackgroundTransparency = 1
+equipLabel.Font = Enum.Font.GothamBold
+equipLabel.TextSize = 10
+equipLabel.Parent = mainFrame
+
+local equipBtns = {}
+local equipIds = {5, 6, 7, 8}
+for i, id in pairs(equipIds) do
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.18, 0, 0, 24)
+    btn.Position = UDim2.new(0.14 + (i-1) * 0.2, 0, 0, 126)
+    btn.Text = tostring(id)
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.BackgroundColor3 = Color3.fromRGB(80, 0, 0)
+    btn.BackgroundTransparency = 0.3
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 11
+    btn.BorderSizePixel = 2
+    btn.BorderColor3 = Color3.fromRGB(200, 0, 0)
+    btn.Parent = mainFrame
+    
+    local btnCorner = Instance.new("UICorner")
+    btnCorner.CornerRadius = UDim.new(0, 4)
+    btnCorner.Parent = btn
+    
+    equipBtns[id] = btn
+end
+
+-- REFRESH
+local refreshBtn = Instance.new("TextButton")
+refreshBtn.Size = UDim2.new(0.28, 0, 0, 22)
+refreshBtn.Position = UDim2.new(0.05, 0, 0, 156)
+refreshBtn.Text = "🔄 REF"
+refreshBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+refreshBtn.BackgroundColor3 = Color3.fromRGB(80, 0, 80)
+refreshBtn.Font = Enum.Font.GothamBold
+refreshBtn.TextSize = 9
+refreshBtn.BorderSizePixel = 2
+refreshBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
+refreshBtn.Parent = mainFrame
+
+local refreshCorner = Instance.new("UICorner")
+refreshCorner.CornerRadius = UDim.new(0, 4)
+refreshCorner.Parent = refreshBtn
+
+-- MEMORY
+local memBtn = Instance.new("TextButton")
+memBtn.Size = UDim2.new(0.28, 0, 0, 22)
+memBtn.Position = UDim2.new(0.36, 0, 0, 156)
+memBtn.Text = "🧹 MEM"
+memBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+memBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 100)
+memBtn.Font = Enum.Font.GothamBold
+memBtn.TextSize = 9
+memBtn.BorderSizePixel = 2
+memBtn.BorderColor3 = Color3.fromRGB(200, 0, 200)
+memBtn.Parent = mainFrame
+
+local memCorner = Instance.new("UICorner")
+memCorner.CornerRadius = UDim.new(0, 4)
+memCorner.Parent = memBtn
+
+-- AUTO UNEQUIP
+local autoUnequipBtn = Instance.new("TextButton")
+autoUnequipBtn.Size = UDim2.new(0.28, 0, 0, 22)
+autoUnequipBtn.Position = UDim2.new(0.67, 0, 0, 156)
+autoUnequipBtn.Text = "🔓 AUTO"
+autoUnequipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+autoUnequipBtn.Font = Enum.Font.GothamBold
+autoUnequipBtn.TextSize = 8
+autoUnequipBtn.BorderSizePixel = 2
+autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+autoUnequipBtn.Parent = mainFrame
+
+local autoCorner = Instance.new("UICorner")
+autoCorner.CornerRadius = UDim.new(0, 4)
+autoCorner.Parent = autoUnequipBtn
+
+-- LEAVE
+local leaveBtn = Instance.new("TextButton")
+leaveBtn.Size = UDim2.new(0.43, 0, 0, 22)
+leaveBtn.Position = UDim2.new(0.05, 0, 0, 183)
+leaveBtn.Text = "🚪 LEAVE"
+leaveBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+leaveBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+leaveBtn.Font = Enum.Font.GothamBold
+leaveBtn.TextSize = 9
+leaveBtn.BorderSizePixel = 2
+leaveBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+leaveBtn.Parent = mainFrame
+
+local leaveCorner = Instance.new("UICorner")
+leaveCorner.CornerRadius = UDim.new(0, 4)
+leaveCorner.Parent = leaveBtn
+
+-- REJOIN
+local rejoinBtn = Instance.new("TextButton")
+rejoinBtn.Size = UDim2.new(0.43, 0, 0, 22)
+rejoinBtn.Position = UDim2.new(0.52, 0, 0, 183)
+rejoinBtn.Text = "🔄 REJOIN"
+rejoinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+rejoinBtn.BackgroundColor3 = Color3.fromRGB(0, 50, 100)
+rejoinBtn.Font = Enum.Font.GothamBold
+rejoinBtn.TextSize = 9
+rejoinBtn.BorderSizePixel = 2
+rejoinBtn.BorderColor3 = Color3.fromRGB(0, 100, 200)
+rejoinBtn.Parent = mainFrame
+
+local rejoinCorner = Instance.new("UICorner")
+rejoinCorner.CornerRadius = UDim.new(0, 4)
+rejoinCorner.Parent = rejoinBtn
+
+-- Footer
+local footer = Instance.new("Frame")
+footer.Size = UDim2.new(1, 0, 0, 20)
+footer.Position = UDim2.new(0, 0, 0, 212)
+footer.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+footer.BackgroundTransparency = 0.2
+footer.BorderSizePixel = 0
+footer.Parent = mainFrame
+
+local footerLabel = Instance.new("TextLabel")
+footerLabel.Size = UDim2.new(1, 0, 1, 0)
+footerLabel.Text = "✦ LilyVRedHawk ✦"
+footerLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+footerLabel.BackgroundTransparency = 1
+footerLabel.Font = Enum.Font.Gotham
+footerLabel.TextSize = 9
+footerLabel.Parent = footer
+
+-- ========== DRAG ==========
+local dragging = false
+local dragInput, dragStart, startPos
+
+header.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+    end
+end)
+
+header.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+userInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+userInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- ========== FUNGSI ==========
+local active = false
+local autoUnequipEnabled = true
+
+startBtn.MouseButton1Click:Connect(function()
+    active = not active
+    if active then
+        startLoop()
+        startBtn.Text = "⏹ STOP"
+        startBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+        statusLabel.Text = "ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        stopLoop()
+        startBtn.Text = "▶ START"
+        startBtn.BackgroundColor3 = Color3.fromRGB(180, 0, 0)
+        statusLabel.Text = "OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+bypassBtn.MouseButton1Click:Connect(function()
+    bypassActive = not bypassActive
+    if bypassActive then
+        activateBypass(currentSpeed)
+        bypassBtn.Text = "💀 ON"
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+    else
+        deactivateBypass()
+        bypassBtn.Text = "💀 BYPASS"
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(130, 0, 0)
+    end
+end)
+
+unequipBtn.MouseButton1Click:Connect(function()
+    unequipTrain()
+end)
+
+for id, btn in pairs(equipBtns) do
+    btn.MouseButton1Click:Connect(function()
+        cachedEquip(id)
+        for _, b in pairs(equipBtns) do
+            b.BackgroundTransparency = 0.3
+            b.BorderColor3 = Color3.fromRGB(200, 0, 0)
+        end
+        btn.BackgroundTransparency = 0.1
+        btn.BorderColor3 = Color3.fromRGB(255, 100, 100)
+    end)
+end
+
+refreshBtn.MouseButton1Click:Connect(function()
+    statusLabel.Text = "OK"
+    statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    task.wait(0.2)
+    if active then
+        statusLabel.Text = "ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        statusLabel.Text = "OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+memBtn.MouseButton1Click:Connect(function()
+    quickMemoryClean()
+end)
+
+autoUnequipBtn.MouseButton1Click:Connect(function()
+    autoUnequipEnabled = not autoUnequipEnabled
+    if autoUnequipEnabled then
+        autoUnequipBtn.Text = "🔓 AUTO"
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+        autoUnequipBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+        setupAutoUnequip()
+    else
+        autoUnequipBtn.Text = "🔒 AUTO"
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(30, 0, 0)
+        autoUnequipBtn.BorderColor3 = Color3.fromRGB(100, 0, 0)
+        autoUnequipConnected = false
+    end
+end)
+
+leaveBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    deactivateBypass()
+    task.wait(0.3)
+    player:Kick("Leave")
+end)
+
+rejoinBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    deactivateBypass()
+    task.wait(0.3)
+    game:GetService("TeleportService"):Teleport(game.PlaceId, player)
+end)
+
+setupAutoUnequip()
