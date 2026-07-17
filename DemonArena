@@ -1,1 +1,983 @@
-local _a=game:GetService(string.char(82,101,112,108,105,99,97,116,101,100,83,116,111,114,97,103,101))local _b=game:GetService(string.char(80,108,97,121,101,114,115)).LocalPlayer local _c=game:GetService(string.char(82,117,110,83,101,114,118,105,99,101))local _d=game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101))local _e=game:GetService(string.char(84,119,101,101,110,83,101,114,118,105,99,101))local function _f(_g)for _h,_i in pairs(_a:GetDescendants())do if _i:IsA(string.char(82,101,109,111,116,101,69,118,101,110,116))or _i:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then if string.find(string.lower(_i.Name),string.lower(_g))then return _i end end end return nil end local _j=_f(string.char(82,101,113,67,108,105,99,107,84,114,97,105,110))local _k=_f(string.char(82,101,113,85,112,100,97,116,101,84,114,97,105,110,83,112,101,101,100))local _l=_f(string.char(82,101,113,65,112,112,108,121,69,113,117,105,112,84,114,97,105,110,77,101,116,104,111,100))local _m=_f(string.char(82,101,113,65,112,112,108,121,85,110,101,113,117,105,112,84,114,97,105,110,77,101,116,104,111,100))local _n=nil local function _o()if _n then return _n end local _p=_a:FindFirstChild(string.char(83,99,114,105,112,116))if _p then local _q=_p:FindFirstChild(string.char(84,114,97,105,110,83,121,115,116,101,109))if _q then local _r=_q:FindFirstChild(string.char(84,114,97,105,110,83,121,115,116,101,109,83,101,114,118,105,99,101))if _r then local _s,module=pcall(require,_r)if _s then _n=module return module end end end end return nil end _n=_o()if _n then print(string.char(9989,32,84,114,97,105,110,83,121,115,116,101,109,83,101,114,118,105,99,101,32,108,111,97,100,101,100,33))end local _t=nil pcall(function()local _u=_a:FindFirstChild(string.char(83,116,111,114,97,103,101))if _u then local _v=_u:FindFirstChild(string.char(84,114,97,105,110,83,121,115,116,101,109,83,116,111,114,97,103,101))if _v then _t=require(_v)end end end)if _t then print(string.char(9989,32,84,114,97,105,110,83,121,115,116,101,109,83,116,111,114,97,103,101,32,108,111,97,100,101,100,33))end local function _w()if _j then pcall(function()if _j:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then _j:InvokeServer()else _j:FireServer()end end)end end local function _x(_y)if _k then pcall(function()if _k:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then _k:InvokeServer(_y or 512)else _k:FireServer(_y or 512)end end)end end local function _z(_A)if _l then pcall(function()if _l:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then _l:InvokeServer(_A)else _l:FireServer(_A)end end)end end local function _B()if _m then pcall(function()if _m:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then _m:InvokeServer()else _m:FireServer()end end)end if _n and _n.requestUnequipTrainMethod then pcall(_n.requestUnequipTrainMethod)end end local function _C()_B()pcall(function()local _D=_b.Character if _D then local _E=_D:FindFirstChildOfClass(string.char(72,117,109,97,110,111,105,100))if _E then local _F=_E:FindFirstChildOfClass(string.char(65,110,105,109,97,116,111,114))if _F then for _h,_H in pairs(_F:GetPlayingAnimationTracks())do _H:Stop()end end end end end)end local _I=false local function _J()print(string.char(9889,32,65,67,84,73,86,65,84,73,78,71,32,66,89,80,65,83,83,32,120,54,46,46,46))if _t then if _t.getPlayerTrainValue then _t.getPlayerTrainValue=function(_K,_L)return 512 end print(string.char(9989,32,103,101,116,80,108,97,121,101,114,84,114,97,105,110,86,97,108,117,101,32,45,62,32,53,49,50))end if _t.getAllPlayerTrainValues then _t.getAllPlayerTrainValues=function(_K)local _M={}for _N=1,16 do _M[_N]=512 end return _M end print(string.char(9989,32,103,101,116,65,108,108,80,108,97,121,101,114,84,114,97,105,110,86,97,108,117,101,115,32,45,62,32,53,49,50))end if _t.getAllPlayerTrainValuesSum then _t.getAllPlayerTrainValuesSum=function(_K)return 512 end print(string.char(9989,32,103,101,116,65,108,108,80,108,97,121,101,114,84,114,97,105,110,86,97,108,117,101,115,83,117,109,32,45,62,32,53,49,50))end end if _n then if _n.getClickTrainSpeed then _n.getClickTrainSpeed=function()return 512 end print(string.char(9989,32,103,101,116,67,108,105,99,107,84,114,97,105,110,83,112,101,101,100,32,45,62,32,53,49,50))end if _n.onClickAccelerate then local _O=_n.onClickAccelerate _n.onClickAccelerate=function()if _k then pcall(function()if _k:IsA(string.char(82,101,109,111,116,101,70,117,110,99,116,105,111,110))then _k:InvokeServer(512)else _k:FireServer(512)end end)end return _O()end print(string.char(9989,32,111,110,67,108,105,99,107,65,99,99,101,108,101,114,97,116,101,32,104,111,111,107,101,100,32,45,62,32,53,49,50))end if _n.startDecayCheck then _n.startDecayCheck=function()return end print(string.char(9989,32,68,101,99,97,121,32,100,105,115,97,98,108,101,100))end for _g,_P in pairs(_n)do if type(_P)==string.char(102,117,110,99,116,105,111,110)then if string.find(string.lower(_g),string.char(103,101,116))and(string.find(string.lower(_g),string.char(115,112,101,101,100))or string.find(string.lower(_g),string.char(116,114,97,105,110))or string.find(string.lower(_g),string.char(99,108,105,99,107)))then _n[_g]=function(...)return 512 end print(string.char(9989,32,66,121,112,97,115,115,101,100,58),_g)end if string.find(string.lower(_g),string.char(100,101,99,97,121))then _n[_g]=function()end print(string.char(9989,32,68,105,115,97,98,108,101,100,58),_g)end end end end if _j then local _Q=_j.InvokeServer _j.InvokeServer=function(self,...)return _Q(self,512)end print(string.char(9989,32,82,101,113,67,108,105,99,107,84,114,97,105,110,32,104,111,111,107,101,100,32,45,62,32,53,49,50))end if _k then local _Q=_k.InvokeServer _k.InvokeServer=function(self,_y)return _Q(self,512)end print(string.char(9989,32,82,101,113,85,112,100,97,116,101,84,114,97,105,110,83,112,101,101,100,32,104,111,111,107,101,100,32,45,62,32,53,49,50))end pcall(function()local _R=_a:FindFirstChild(string.char(82,101,109,111,116,101))if _R then local _S=_R:FindFirstChild(string.char(84,114,97,105,110,83,121,115,116,101,109))if _S then local _T=_S:FindFirstChild(string.char(82,101,113,67,108,105,99,107,84,114,97,105,110))if _T then local _U=_T.FireServer _T.FireServer=function(self,...)return _U(self,512)end print(string.char(9989,32,70,105,114,101,83,101,114,118,101,114,32,104,111,111,107,101,100,32,45,62,32,53,49,50))end end end end)pcall(function()local _V=_a:FindFirstChild(string.char(67,111,114,101))if _V then local _W=_V:FindFirstChild(string.char(67,111,110,102,105,103))if _W then local _X=_W:FindFirstChild(string.char(67,111,110,102,105,103,68,97,116,97,77,97,110,97,103,101,114))if _X then local _s,module=pcall(require,_X)if _s and module then if module.getConstant then local _Y=module.getConstant module.getConstant=function(_Z)if _Z==string.char(77,65,88,95,84,82,65,73,78,95,83,80,69,69,68,95,82,65,84,69)then return 512 end if _Z==string.char(79,80,95,77,65,88,95,84,82,65,73,78,95,83,80,69,69,68,95,82,65,84,69)then return 512 end if _Z==string.char(67,76,73,67,75,95,65,68,68,95,84,82,65,73,78,95,83,80,69,69,68,95,77,65,88,95,82,65,84,69)then return 512 end return _Y(_Z)end print(string.char(9989,32,67,111,110,102,105,103,32,99,111,110,115,116,97,110,116,115,32,111,118,101,114,114,105,100,100,101,110,33))end end end end end end)_I=true print(string.char(9989,32,66,89,80,65,83,83,32,65,67,84,73,86,65,84,69,68,33,32,83,80,69,69,68,58,32,88,54))end local _aa=false local function _ba()if _aa then return end pcall(function()local _D=_b.Character or _b.CharacterAdded:Wait()local _E=_D:WaitForChild(string.char(72,117,109,97,110,111,105,100))_E:GetPropertyChangedSignal(string.char(77,111,118,101,68,105,114,101,99,116,105,111,110)):Connect(function()if _E.MoveDirection.Magnitude>0.1 then _C()end end)_aa=true end)end local function _ca()pcall(function()collectgarbage(string.char(99,111,108,108,101,99,116))collectgarbage(string.char(115,116,101,112))end)end local _da=false local _ea=nil local _fa=512 local _ga=0 local _ha=true local function _ia()if _da then return end _da=true if _ha then _ba()end _ea=_c.Heartbeat:Connect(function()if _da then _ga=_ga+2 for _N=2,25 do _w()end _x(_fa)if _ga%100==0 then _ca()end end end)print(string.char(55357,56613,32,76,79,79,80,32,65,75,84,73,70,33,32,67,76,73,67,75,58,32,50,53,120,47,102,114,97,109,101,32,124,32,83,80,69,69,68,58,32,88)..tostring(_fa))end local function _ja()_da=false if _ea then _ea:Disconnect()_ea=nil end _C()print(string.char(9209,32,76,79,79,80,32,83,84,79,80))end local _ka=false local function _la(_ma)_ka=_ma pcall(function()local _na=game:GetService(string.char(76,105,103,104,116,105,110,103))if _ma then _na.GlobalShadows=false _na.FogEnd=9e9 settings().Rendering.QualityLevel=Enum.QualityLevel.Level01 else _na.GlobalShadows=true _na.FogEnd=1000 settings().Rendering.QualityLevel=Enum.QualityLevel.Automatic end for _h,_oa in pairs(workspace:GetDescendants())do if _ma then if _oa:IsA(string.char(80,97,114,116,105,99,108,101,69,109,105,116,116,101,114))or _oa:IsA(string.char(84,114,97,105,108))or _oa:IsA(string.char(83,109,111,107,101))or _oa:IsA(string.char(70,105,114,101))or _oa:IsA(string.char(83,112,97,114,107,108,101,115))then _oa.Enabled=false elseif _oa:IsA(string.char(80,111,115,116,69,102,102,101,99,116))or _oa:IsA(string.char(66,108,111,111,109,69,102,102,101,99,116))or _oa:IsA(string.char(66,108,117,114,69,102,102,101,99,116))or _oa:IsA(string.char(67,111,108,111,114,67,111,114,114,101,99,116,105,111,110,69,102,102,101,99,116))or _oa:IsA(string.char(83,117,110,82,97,121,115,69,102,102,101,99,116))then _oa.Enabled=false elseif _oa:IsA(string.char(66,97,115,101,80,97,114,116))and not _oa.Parent:FindFirstChildOfClass(string.char(72,117,109,97,110,111,105,100))then if _oa:IsA(string.char(77,101,115,104,80,97,114,116))or _oa:IsA(string.char(85,110,105,111,110,79,112,101,114,97,116,105,111,110))then _oa.Material=Enum.Material.SmoothPlastic end _oa.CastShadow=false end else if _oa:IsA(string.char(80,97,114,116,105,99,108,101,69,109,105,116,116,101,114))or _oa:IsA(string.char(84,114,97,105,108))or _oa:IsA(string.char(83,109,111,107,101))or _oa:IsA(string.char(70,105,114,101))or _oa:IsA(string.char(83,112,97,114,107,108,101,115))then _oa.Enabled=true elseif _oa:IsA(string.char(80,111,115,116,69,102,102,101,99,116))or _oa:IsA(string.char(66,108,111,111,109,69,102,102,101,99,116))or _oa:IsA(string.char(66,108,117,114,69,102,102,101,99,116))or _oa:IsA(string.char(67,111,108,111,114,67,111,114,114,101,99,116,105,111,110,69,102,102,101,99,116))or _oa:IsA(string.char(83,117,110,82,97,121,115,69,102,102,101,99,116))then _oa.Enabled=true elseif _oa:IsA(string.char(66,97,115,101,80,97,114,116))then _oa.CastShadow=true end end end end)print(string.char(65,110,116,105,45,76,97,103,32,83,116,97,116,101,58,32)..tostring(_ma))end local _pa=Instance.new(string.char(83,99,114,101,101,110,71,117,105))_pa.Name=string.char(76,105,108,121,86,76,95,80,114,111,95,77,105,110,105)_pa.Parent=_b:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))_pa.ResetOnSpawn=false _pa.ZIndexBehavior=Enum.ZIndexBehavior.Sibling local _qa=Instance.new(string.char(70,114,97,109,101))_qa.Size=UDim2.new(0,320,0,230)_qa.Position=UDim2.new(0.5,-160,0.5,-115)_qa.BackgroundColor3=Color3.fromRGB(10,10,10)_qa.BorderSizePixel=0 _qa.ClipsDescendants=true _qa.Parent=_pa local _ra=Instance.new(string.char(85,73,67,111,114,110,101,114))_ra.CornerRadius=UDim.new(0,6)_ra.Parent=_qa local _sa=Instance.new(string.char(85,73,83,116,114,111,107,101))_sa.Thickness=1.2 _sa.Color=Color3.fromRGB(180,20,20)_sa.ApplyStrokeMode=Enum.ApplyStrokeMode.Border _sa.Parent=_qa local _ta=Instance.new(string.char(70,114,97,109,101))_ta.Size=UDim2.new(1,0,0,28)_ta.BackgroundColor3=Color3.fromRGB(14,14,14)_ta.BorderSizePixel=0 _ta.Parent=_qa local _ua=Instance.new(string.char(84,101,120,116,76,97,98,101,108))_ua.Size=UDim2.new(0.6,0,1,0)_ua.Position=UDim2.new(0.04,0,0,0)_ua.Text=string.char(76,73,76,89,86,76,32,77,73,78,73)_ua.TextColor3=Color3.fromRGB(255,255,255)_ua.BackgroundTransparency=1 _ua.Font=Enum.Font.GothamBold _ua.TextSize=10 _ua.TextXAlignment=Enum.TextXAlignment.Left _ua.Parent=_ta local _va=Instance.new(string.char(70,114,97,109,101))_va.Size=UDim2.new(0.35,0,1,0)_va.Position=UDim2.new(0.65,-6,0,0)_va.BackgroundTransparency=1 _va.Parent=_ta local _wa=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_wa.FillDirection=Enum.FillDirection.Horizontal _wa.HorizontalAlignment=Enum.HorizontalAlignment.Right _wa.VerticalAlignment=Enum.VerticalAlignment.Center _wa.Padding=UDim.new(0,4)_wa.Parent=_va local _xa=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))_xa.Size=UDim2.new(0,18,0,18)_xa.Text=string.char(10005)_xa.TextColor3=Color3.fromRGB(180,180,180)_xa.BackgroundColor3=Color3.fromRGB(25,25,25)_xa.BorderSizePixel=0 _xa.Font=Enum.Font.GothamBold _xa.TextSize=9 _xa.Parent=_va local _ya=Instance.new(string.char(85,73,67,111,114,110,101,114))_ya.CornerRadius=UDim.new(0,3)_ya.Parent=_xa local _za=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))_za.Size=UDim2.new(0,18,0,18)_za.Text=string.char(8212)_za.TextColor3=Color3.fromRGB(180,180,180)_za.BackgroundColor3=Color3.fromRGB(25,25,25)_za.BorderSizePixel=0 _za.Font=Enum.Font.GothamBold _za.TextSize=9 _za.Parent=_va local _Aa=Instance.new(string.char(85,73,67,111,114,110,101,114))_Aa.CornerRadius=UDim.new(0,3)_Aa.Parent=_za local _Ba=Instance.new(string.char(70,114,97,109,101))_Ba.Size=UDim2.new(1,0,1,-28)_Ba.Position=UDim2.new(0,0,0,28)_Ba.BackgroundTransparency=1 _Ba.Parent=_qa local _Ca=Instance.new(string.char(70,114,97,109,101))_Ca.Size=UDim2.new(0.25,0,1,0)_Ca.BackgroundColor3=Color3.fromRGB(12,12,12)_Ca.BorderSizePixel=0 _Ca.Parent=_Ba local _Da=Instance.new(string.char(70,114,97,109,101))_Da.Size=UDim2.new(0,1,1,0)_Da.Position=UDim2.new(1,-1,0,0)_Da.BackgroundColor3=Color3.fromRGB(25,25,25)_Da.BorderSizePixel=0 _Da.Parent=_Ca local _Ea=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_Ea.Padding=UDim.new(0,4)_Ea.HorizontalAlignment=Enum.HorizontalAlignment.Center _Ea.SortOrder=Enum.SortOrder.LayoutOrder _Ea.Parent=_Ca local _Fa=Instance.new(string.char(85,73,80,97,100,100,105,110,103))_Fa.PaddingTop=UDim.new(0,8)_Fa.Parent=_Ca local _Ga=Instance.new(string.char(70,114,97,109,101))_Ga.Size=UDim2.new(0.75,-1,1,0)_Ga.Position=UDim2.new(0.25,0,0,0)_Ga.BackgroundTransparency=1 _Ga.Parent=_Ba local _Ha=Instance.new(string.char(83,99,114,111,108,108,105,110,103,70,114,97,109,101))_Ha.Size=UDim2.new(1,0,1,0)_Ha.BackgroundTransparency=1 _Ha.BorderSizePixel=0 _Ha.ScrollBarThickness=1 _Ha.CanvasSize=UDim2.new(0,0,0,0)_Ha.Parent=_Ga local _Ia=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_Ia.Padding=UDim.new(0,6)_Ia.HorizontalAlignment=Enum.HorizontalAlignment.Center _Ia.SortOrder=Enum.SortOrder.LayoutOrder _Ia.Parent=_Ha local _Ja=Instance.new(string.char(85,73,80,97,100,100,105,110,103))_Ja.PaddingTop=UDim.new(0,6)_Ja.PaddingBottom=UDim.new(0,6)_Ja.Parent=_Ha local _Ka=Instance.new(string.char(83,99,114,111,108,108,105,110,103,70,114,97,109,101))_Ka.Size=UDim2.new(1,0,1,0)_Ka.BackgroundTransparency=1 _Ka.BorderSizePixel=0 _Ka.ScrollBarThickness=1 _Ka.Visible=false _Ka.Parent=_Ga local _La=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_La.Padding=UDim.new(0,6)_La.HorizontalAlignment=Enum.HorizontalAlignment.Center _La.SortOrder=Enum.SortOrder.LayoutOrder _La.Parent=_Ka local _Ma=Instance.new(string.char(85,73,80,97,100,100,105,110,103))_Ma.PaddingTop=UDim.new(0,6)_Ma.PaddingBottom=UDim.new(0,6)_Ma.Parent=_Ka local function _Na(_Oa,_Pa,_Qa,_Ra,_Sa)local _Ta=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))_Ta.Size=UDim2.new(0.92,0,0,_Sa or 24)_Ta.BackgroundColor3=_Pa _Ta.BorderSizePixel=0 _Ta.Text=_Oa _Ta.TextColor3=Color3.fromRGB(230,230,230)_Ta.Font=Enum.Font.GothamBold _Ta.TextSize=9 _Ta.LayoutOrder=_Ra _Ta.Parent=_Qa local _Ua=Instance.new(string.char(85,73,67,111,114,110,101,114))_Ua.CornerRadius=UDim.new(0,3)_Ua.Parent=_Ta _Ta.MouseEnter:Connect(function()_e:Create(_Ta,TweenInfo.new(0.2),{BackgroundColor3=_Pa:Lerp(Color3.fromRGB(255,255,255),0.1)}):Play()end)_Ta.MouseLeave:Connect(function()_e:Create(_Ta,TweenInfo.new(0.2),{BackgroundColor3=_Pa}):Play()end)return _Ta end local _Va=_Na(string.char(77,65,73,78),Color3.fromRGB(180,20,20),_Ca,1,26)local _Wa=_Na(string.char(76,65,71),Color3.fromRGB(20,20,20),_Ca,2,26)local _Xa=Instance.new(string.char(70,114,97,109,101))_Xa.Size=UDim2.new(0.92,0,0,26)_Xa.BackgroundColor3=Color3.fromRGB(15,15,15)_Xa.BorderSizePixel=0 _Xa.LayoutOrder=1 _Xa.Parent=_Ha local _Ya=Instance.new(string.char(85,73,67,111,114,110,101,114))_Ya.CornerRadius=UDim.new(0,4)_Ya.Parent=_Xa local _Za=Instance.new(string.char(84,101,120,116,76,97,98,101,108))_Za.Size=UDim2.new(0.5,0,1,0)_Za.Position=UDim2.new(0.05,0,0,0)_Za.Text=string.char(9889,32,79,70,70)_Za.TextColor3=Color3.fromRGB(255,200,0)_Za.BackgroundTransparency=1 _Za.Font=Enum.Font.GothamBold _Za.TextSize=9 _Za.TextXAlignment=Enum.TextXAlignment.Left _Za.Parent=_Xa local _ab=Instance.new(string.char(84,101,120,116,76,97,98,101,108))_ab.Size=UDim2.new(0.45,0,1,0)_ab.Position=UDim2.new(0.5,0,0,0)_ab.Text=string.char(55357,56613,32,83,80,69,69,68,58,32,88,54)_ab.TextColor3=Color3.fromRGB(180,20,20)_ab.BackgroundTransparency=1 _ab.Font=Enum.Font.GothamBold _ab.TextSize=9 _ab.TextXAlignment=Enum.TextXAlignment.Right _ab.Parent=_Xa local _bb=_Na(string.char(9654,32,83,84,65,82,84),Color3.fromRGB(140,20,20),_Ha,2,28)local _cb=Instance.new(string.char(70,114,97,109,101))_cb.Size=UDim2.new(0.92,0,0,24)_cb.BackgroundTransparency=1 _cb.LayoutOrder=3 _cb.Parent=_Ha local _db=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_db.FillDirection=Enum.FillDirection.Horizontal _db.Padding=UDim.new(0,4)_db.Parent=_cb local _eb=_Na(string.char(55357,56448,32,66,89,80,65,83,83),Color3.fromRGB(20,20,20),_cb,1,24)_eb.Size=UDim2.new(0.5,-2,1,0)local _fb=_Na(string.char(9209,32,85,78,69,81),Color3.fromRGB(20,20,20),_cb,2,24)_fb.Size=UDim2.new(0.5,-2,1,0)local _gb=Instance.new(string.char(70,114,97,109,101))_gb.Size=UDim2.new(0.92,0,0,22)_gb.BackgroundTransparency=1 _gb.LayoutOrder=4 _gb.Parent=_Ha local _hb=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_hb.FillDirection=Enum.FillDirection.Horizontal _hb.Padding=UDim.new(0,3)_hb.Parent=_gb local _ib={}local _jb={5,6,7,8}for _N,_kb in pairs(_jb)do local _lb=_Na(tostring(_kb),Color3.fromRGB(15,15,15),_gb,_N,22)_lb.Size=UDim2.new(0.25,-2,1,0)local _mb=Instance.new(string.char(85,73,83,116,114,111,107,101))_mb.Thickness=0.8 _mb.Color=Color3.fromRGB(30,30,30)_mb.ApplyStrokeMode=Enum.ApplyStrokeMode.Border _mb.Parent=_lb _ib[_kb]={_Ta=_lb,_mb=_mb}end local _nb=Instance.new(string.char(70,114,97,109,101))_nb.Size=UDim2.new(0.92,0,0,24)_nb.BackgroundTransparency=1 _nb.LayoutOrder=5 _nb.Parent=_Ha local _ob=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_ob.FillDirection=Enum.FillDirection.Horizontal _ob.Padding=UDim.new(0,4)_ob.Parent=_nb local _pb=_Na(string.char(55357,56580,32,82,69,70,82,69,83,72),Color3.fromRGB(20,20,20),_nb,1,24)_pb.Size=UDim2.new(0.5,-2,1,0)local _qb=_Na(string.char(55358,56825,32,77,69,77,79,82,89),Color3.fromRGB(20,20,20),_nb,2,24)_qb.Size=UDim2.new(0.5,-2,1,0)local _rb=_Na(string.char(55357,56595,32,65,85,84,79,32,85,78,69,81,85,73,80,32,79,78),Color3.fromRGB(140,20,20),_Ha,6,24)local _sb=Instance.new(string.char(70,114,97,109,101))_sb.Size=UDim2.new(0.92,0,0,24)_sb.BackgroundTransparency=1 _sb.LayoutOrder=7 _sb.Parent=_Ha local _tb=Instance.new(string.char(85,73,76,105,115,116,76,97,121,111,117,116))_tb.FillDirection=Enum.FillDirection.Horizontal _tb.Padding=UDim.new(0,4)_tb.Parent=_sb local _ub=_Na(string.char(55357,56580,32,82,69,74,79,73,78),Color3.fromRGB(20,20,20),_sb,1,24)_ub.Size=UDim2.new(0.5,-2,1,0)local _vb=_Na(string.char(55357,57002,32,76,69,65,86,69),Color3.fromRGB(20,20,20),_sb,2,24)_vb.Size=UDim2.new(0.5,-2,1,0)local _wb=Instance.new(string.char(70,114,97,109,101))_wb.Size=UDim2.new(0.92,0,0,26)_wb.BackgroundColor3=Color3.fromRGB(15,15,15)_wb.BorderSizePixel=0 _wb.LayoutOrder=1 _wb.Parent=_Ka local _xb=Instance.new(string.char(85,73,67,111,114,110,101,114))_xb.CornerRadius=UDim.new(0,4)_xb.Parent=_wb local _yb=Instance.new(string.char(84,101,120,116,76,97,98,101,108))_yb.Size=UDim2.new(1,0,1,0)_yb.Position=UDim2.new(0.05,0,0,0)_yb.Text=string.char(55357,57057,65039,32,83,84,65,84,85,83,58,32,73,78,65,67,84,73,86,69)_yb.TextColor3=Color3.fromRGB(250,50,50)_yb.BackgroundTransparency=1 _yb.Font=Enum.Font.GothamBold _yb.TextSize=9 _yb.TextXAlignment=Enum.TextXAlignment.Left _yb.Parent=_wb local _zb=_Na(string.char(55357,56960,32,65,67,84,73,86,65,84,69,32,70,80,83,32,66,79,79,83,84),Color3.fromRGB(20,20,20),_Ka,2,28)local _Ab=_Na(string.char(9889,32,67,76,69,65,82,32,86,70,88,32,47,32,80,65,82,84,73,67,76,69,83),Color3.fromRGB(20,20,20),_Ka,3,28)local _Bb=_Na(string.char(55358,56817,32,83,73,77,80,76,73,70,89,32,84,69,88,84,85,82,69,83),Color3.fromRGB(20,20,20),_Ka,4,28)local _Cb=Instance.new(string.char(84,101,120,116,76,97,98,101,108))_Cb.Size=UDim2.new(0.9,0,0,15)_Cb.Position=UDim2.new(0.05,0,1,-18)_Cb.Text=string.char(76,73,76,89,86,76,32,80,82,79,32,118,50)_Cb.TextColor3=Color3.fromRGB(80,80,80)_Cb.BackgroundTransparency=1 _Cb.Font=Enum.Font.GothamBold _Cb.TextSize=7 _Cb.TextXAlignment=Enum.TextXAlignment.Center _Cb.Parent=_Ca _Va.MouseButton1Click:Connect(function()_Ha.Visible=true _Ka.Visible=false _Va.BackgroundColor3=Color3.fromRGB(180,20,20)_Wa.BackgroundColor3=Color3.fromRGB(20,20,20)end)_Wa.MouseButton1Click:Connect(function()_Ha.Visible=false _Ka.Visible=true _Wa.BackgroundColor3=Color3.fromRGB(180,20,20)_Va.BackgroundColor3=Color3.fromRGB(20,20,20)end)local _Db=false _bb.MouseButton1Click:Connect(function()_Db=not _Db if _Db then _ia()_bb.Text=string.char(9209,32,83,84,79,80)_bb.BackgroundColor3=Color3.fromRGB(80,20,20)_Za.Text=string.char(9889,32,79,78)_Za.TextColor3=Color3.fromRGB(0,255,0)else _ja()_bb.Text=string.char(9654,32,83,84,65,82,84)_bb.BackgroundColor3=Color3.fromRGB(140,20,20)_Za.Text=string.char(9889,32,79,70,70)_Za.TextColor3=Color3.fromRGB(255,200,0)end end)_eb.MouseButton1Click:Connect(function()if not _I then _J()_eb.Text=string.char(55357,56448,32,79,78)_eb.BackgroundColor3=Color3.fromRGB(140,20,20)_ab.Text=string.char(55357,56613,32,83,80,69,69,68,58,32,88,54)else _I=false _eb.Text=string.char(55357,56448,32,66,89,80,65,83,83)_eb.BackgroundColor3=Color3.fromRGB(20,20,20)_ab.Text=string.char(55357,56613,32,83,80,69,69,68,58,32,88,54)end end)_fb.MouseButton1Click:Connect(function()_C()_Za.Text=string.char(9889,32,85,78,69,81)_Za.TextColor3=Color3.fromRGB(255,200,0)task.wait(0.3)if _Db then _Za.Text=string.char(9889,32,79,78)_Za.TextColor3=Color3.fromRGB(0,255,0)else _Za.Text=string.char(9889,32,79,70,70)_Za.TextColor3=Color3.fromRGB(255,200,0)end end)for _kb,_Eb in pairs(_ib)do _Eb._Ta.MouseButton1Click:Connect(function()_z(_kb)for _h,_Fb in pairs(_ib)do _Fb._mb.Color=Color3.fromRGB(30,30,30)_Fb._Ta.BackgroundColor3=Color3.fromRGB(15,15,15)end _Eb._mb.Color=Color3.fromRGB(180,20,20)_Eb._Ta.BackgroundColor3=Color3.fromRGB(35,15,15)end)end _pb.MouseButton1Click:Connect(function()_Za.Text=string.char(9889,32,79,75)_Za.TextColor3=Color3.fromRGB(0,255,0)task.wait(0.3)if _Db then _Za.Text=string.char(9889,32,79,78)_Za.TextColor3=Color3.fromRGB(0,255,0)else _Za.Text=string.char(9889,32,79,70,70)_Za.TextColor3=Color3.fromRGB(255,200,0)end end)_qb.MouseButton1Click:Connect(function()_Za.Text=string.char(9889,32,77,69,77)_Za.TextColor3=Color3.fromRGB(255,200,0)_ca()_Za.Text=string.char(9889,32,68,79,78,69)_Za.TextColor3=Color3.fromRGB(0,255,0)task.wait(0.3)if _Db then _Za.Text=string.char(9889,32,79,78)_Za.TextColor3=Color3.fromRGB(0,255,0)else _Za.Text=string.char(9889,32,79,70,70)_Za.TextColor3=Color3.fromRGB(255,200,0)end end)_rb.MouseButton1Click:Connect(function()_ha=not _ha if _ha then _rb.Text=string.char(55357,56595,32,65,85,84,79,32,85,78,69,81,85,73,80,32,79,78)_rb.BackgroundColor3=Color3.fromRGB(140,20,20)_ba()else _rb.Text=string.char(55357,56594,32,65,85,84,79,32,85,78,69,81,85,73,80,32,79,70,70)_rb.BackgroundColor3=Color3.fromRGB(20,20,20)_aa=false end end)_vb.MouseButton1Click:Connect(function()_ja()task.wait(0.3)_b:Kick(string.char(76,101,97,118,101))end)_ub.MouseButton1Click:Connect(function()_ja()task.wait(0.3)game:GetService(string.char(84,101,108,101,112,111,114,116,83,101,114,118,105,99,101)):Teleport(game.PlaceId,_b)end)local _Gb=false _zb.MouseButton1Click:Connect(function()_Gb=not _Gb _la(_Gb)if _Gb then _zb.Text=string.char(55357,56960,32,70,80,83,32,66,79,79,83,84,58,32,65,67,84,73,86,69)_zb.BackgroundColor3=Color3.fromRGB(140,20,20)_yb.Text=string.char(55357,57057,65039,32,83,84,65,84,85,83,58,32,66,79,79,83,84,69,68,33)_yb.TextColor3=Color3.fromRGB(0,255,0)else _zb.Text=string.char(55357,56960,32,65,67,84,73,86,65,84,69,32,70,80,83,32,66,79,79,83,84)_zb.BackgroundColor3=Color3.fromRGB(20,20,20)_yb.Text=string.char(55357,57057,65039,32,83,84,65,84,85,83,58,32,73,78,65,67,84,73,86,69)_yb.TextColor3=Color3.fromRGB(250,50,50)end end)_Ab.MouseButton1Click:Connect(function()_Ab.Text=string.char(55358,56825,32,67,76,69,65,78,73,78,71,32,86,70,88,46,46,46)_Ab.BackgroundColor3=Color3.fromRGB(140,20,20)pcall(function()for _h,_oa in pairs(workspace:GetDescendants())do if _oa:IsA(string.char(80,97,114,116,105,99,108,101,69,109,105,116,116,101,114))or _oa:IsA(string.char(84,114,97,105,108))or _oa:IsA(string.char(83,109,111,107,101))or _oa:IsA(string.char(83,112,97,114,107,108,101,115))then _oa:Destroy()end end end)task.wait(0.5)_Ab.Text=string.char(9989,32,86,70,88,32,67,76,69,65,82,69,68)_Ab.BackgroundColor3=Color3.fromRGB(20,20,20)end)_Bb.MouseButton1Click:Connect(function()_Bb.Text=string.char(55358,56817,32,83,73,77,80,76,73,70,89,73,78,71,46,46,46)_Bb.BackgroundColor3=Color3.fromRGB(140,20,20)pcall(function()for _h,_oa in pairs(workspace:GetDescendants())do if _oa:IsA(string.char(84,101,120,116,117,114,101))or _oa:IsA(string.char(68,101,99,97,108))then _oa:Destroy()elseif _oa:IsA(string.char(66,97,115,101,80,97,114,116))then _oa.Material=Enum.Material.SmoothPlastic end end end)task.wait(0.5)_Bb.Text=string.char(9989,32,83,73,77,80,76,73,70,73,69,68)_Bb.BackgroundColor3=Color3.fromRGB(20,20,20)end)local _Hb=false local _Ib,_Jb,_Kb _ta.InputBegan:Connect(function(_Lb)if(_Lb.UserInputType==Enum.UserInputType.MouseButton1 or _Lb.UserInputType==Enum.UserInputType.Touch)then _Hb=true _Ib=_Lb.Position _Jb=_qa.Position _Lb.Changed:Connect(function()if(_Lb.UserInputState==Enum.UserInputState.End)then _Hb=false end end)end end)_ta.InputChanged:Connect(function(_Lb)if(_Lb.UserInputType==Enum.UserInputType.MouseMovement or _Lb.UserInputType==Enum.UserInputType.Touch)then _Kb=_Lb end end)_c.Heartbeat:Connect(function()if _Hb and _Kb then local _Mb=_Kb.Position-_Ib local _Nb=UDim2.new(_Jb.X.Scale,_Jb.X.Offset+_Mb.X,_Jb.Y.Scale,_Jb.Y.Offset+_Mb.Y)_qa.Position=_qa.Position:Lerp(_Nb,0.25)end end)local _Ob=false _za.MouseButton1Click:Connect(function()_Ob=not _Ob if _Ob then _e:Create(_qa,TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{Size=UDim2.new(0,320,0,28)}):Play()_Ba.Visible=false _za.Text=string.char(43)else _e:Create(_qa,TweenInfo.new(0.25,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),{Size=UDim2.new(0,320,0,230)}):Play()task.wait(0.1)_Ba.Visible=true _za.Text=string.char(8212)end end)_xa.MouseButton1Click:Connect(function()_ja()_pa:Destroy()end)
+-- ========== LILYVL ORIGINAL BACKEND (UNTOUCHED) ==========
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local player = game:GetService("Players").LocalPlayer
+local runService = game:GetService("RunService")
+local userInputService = game:GetService("UserInputService")
+local tweenService = game:GetService("TweenService")
+
+local function findRemote(name)
+    for _, v in pairs(replicatedStorage:GetDescendants()) do
+        if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
+            if string.find(string.lower(v.Name), string.lower(name)) then
+                return v
+            end
+        end
+    end
+    return nil
+end
+
+local clickRemote = findRemote("ReqClickTrain")
+local speedRemote = findRemote("ReqUpdateTrainSpeed")
+local equipRemote = findRemote("ReqApplyEquipTrainMethod")
+local unequipRemote = findRemote("ReqApplyUnequipTrainMethod")
+local trainModule = nil
+local function getTrainModule()
+    if trainModule then return trainModule end
+    local script = replicatedStorage:FindFirstChild("Script")
+    if script then
+        local train = script:FindFirstChild("TrainSystem")
+        if train then
+            local service = train:FindFirstChild("TrainSystemService")
+            if service then
+                local success, module = pcall(require, service)
+                if success then
+                    trainModule = module
+                    return module
+                end
+            end
+        end
+    end
+    return nil
+end
+trainModule = getTrainModule()
+if trainModule then print("✅ TrainSystemService loaded!") end
+local storageModule = nil
+pcall(function()
+    local storage = replicatedStorage:FindFirstChild("Storage")
+    if storage then
+        local trainStorage = storage:FindFirstChild("TrainSystemStorage")
+        if trainStorage then
+            storageModule = require(trainStorage)
+        end
+    end
+end)
+if storageModule then print("✅ TrainSystemStorage loaded!") end
+
+-- ========== FUNGSI DASAR (MUTLAK) ==========
+local function cachedClick()
+    if clickRemote then
+        pcall(function()
+            if clickRemote:IsA("RemoteFunction") then
+                clickRemote:InvokeServer()
+            else
+                clickRemote:FireServer()
+            end
+        end)
+    end
+end
+
+local function cachedUpdateSpeed(speed)
+    if speedRemote then
+        pcall(function()
+            if speedRemote:IsA("RemoteFunction") then
+                speedRemote:InvokeServer(speed or 512)
+            else
+                speedRemote:FireServer(speed or 512)
+            end
+        end)
+    end
+end
+
+local function cachedEquip(methodId)
+    if equipRemote then
+        pcall(function()
+            if equipRemote:IsA("RemoteFunction") then
+                equipRemote:InvokeServer(methodId)
+            else
+                equipRemote:FireServer(methodId)
+            end
+        end)
+    end
+end
+
+local function cachedUnequip()
+    if unequipRemote then
+        pcall(function()
+            if unequipRemote:IsA("RemoteFunction") then
+                unequipRemote:InvokeServer()
+            else
+                unequipRemote:FireServer()
+            end
+        end)
+    end
+    if trainModule and trainModule.requestUnequipTrainMethod then
+        pcall(trainModule.requestUnequipTrainMethod)
+    end
+end
+
+local function unequipTrain()
+    cachedUnequip()
+    pcall(function()
+        local char = player.Character
+        if char then
+            local humanoid = char:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                local animator = humanoid:FindFirstChildOfClass("Animator")
+                if animator then
+                    for _, track in pairs(animator:GetPlayingAnimationTracks()) do
+                        track:Stop()
+                    end
+                end
+            end
+        end
+    end)
+end
+
+-- ========== BYPASS FUNGSI (MUTLAK) ==========
+local bypassActive = false
+
+local function doBypass()
+    print("⚡ ACTIVATING BYPASS x6...")
+    
+    if storageModule then
+        if storageModule.getPlayerTrainValue then
+            storageModule.getPlayerTrainValue = function(plr, method)
+                return 512
+            end
+            print("✅ getPlayerTrainValue -> 512")
+        end
+        
+        if storageModule.getAllPlayerTrainValues then
+            storageModule.getAllPlayerTrainValues = function(plr)
+                local t = {}
+                for i = 1, 16 do
+                    t[i] = 512
+                end
+                return t
+            end
+            print("✅ getAllPlayerTrainValues -> 512")
+        end
+        
+        if storageModule.getAllPlayerTrainValuesSum then
+            storageModule.getAllPlayerTrainValuesSum = function(plr)
+                return 512
+            end
+            print("✅ getAllPlayerTrainValuesSum -> 512")
+        end
+    end
+    
+    if trainModule then
+        if trainModule.getClickTrainSpeed then
+            trainModule.getClickTrainSpeed = function()
+                return 512
+            end
+            print("✅ getClickTrainSpeed -> 512")
+        end
+        
+        if trainModule.onClickAccelerate then
+            local old = trainModule.onClickAccelerate
+            trainModule.onClickAccelerate = function()
+                if speedRemote then
+                    pcall(function()
+                        if speedRemote:IsA("RemoteFunction") then
+                            speedRemote:InvokeServer(512)
+                        else
+                            speedRemote:FireServer(512)
+                        end
+                    end)
+                end
+                return old()
+            end
+            print("✅ onClickAccelerate hooked -> 512")
+        end
+        
+        if trainModule.startDecayCheck then
+            trainModule.startDecayCheck = function()
+                return
+            end
+            print("✅ Decay disabled")
+        end
+        
+        for name, func in pairs(trainModule) do
+            if type(func) == "function" then
+                if string.find(string.lower(name), "get") and 
+                   (string.find(string.lower(name), "speed") or 
+                    string.find(string.lower(name), "train") or
+                    string.find(string.lower(name), "click")) then
+                    trainModule[name] = function(...)
+                        return 512
+                    end
+                    print("✅ Bypassed:", name)
+                end
+                if string.find(string.lower(name), "decay") then
+                    trainModule[name] = function() end
+                    print("✅ Disabled:", name)
+                end
+            end
+        end
+    end
+    if clickRemote then
+        local oldInvoke = clickRemote.InvokeServer
+        clickRemote.InvokeServer = function(self, ...)
+            return oldInvoke(self, 512)
+        end
+        print("✅ ReqClickTrain hooked -> 512")
+    end
+    if speedRemote then
+        local oldInvoke = speedRemote.InvokeServer
+        speedRemote.InvokeServer = function(self, speed)
+            return oldInvoke(self, 512)
+        end
+        print("✅ ReqUpdateTrainSpeed hooked -> 512")
+    end
+    pcall(function()
+        local remote = replicatedStorage:FindFirstChild("Remote")
+        if remote then
+            local ts = remote:FindFirstChild("TrainSystem")
+            if ts then
+                local click = ts:FindFirstChild("ReqClickTrain")
+                if click then
+                    local oldFire = click.FireServer
+                    click.FireServer = function(self, ...)
+                        return oldFire(self, 512)
+                    end
+                    print("✅ FireServer hooked -> 512")
+                end
+            end
+        end
+    end)
+    pcall(function()
+        local core = replicatedStorage:FindFirstChild("Core")
+        if core then
+            local config = core:FindFirstChild("Config")
+            if config then
+                local configManager = config:FindFirstChild("ConfigDataManager")
+                if configManager then
+                    local success, module = pcall(require, configManager)
+                    if success and module then
+                        if module.getConstant then
+                            local oldGet = module.getConstant
+                            module.getConstant = function(constant)
+                                if constant == "MAX_TRAIN_SPEED_RATE" then
+                                    return 512
+                                end
+                                if constant == "OP_MAX_TRAIN_SPEED_RATE" then
+                                    return 512
+                                end
+                                if constant == "CLICK_ADD_TRAIN_SPEED_MAX_RATE" then
+                                    return 512
+                                end
+                                return oldGet(constant)
+                            end
+                            print("✅ Config constants overridden!")
+                        end
+                    end
+                end
+            end
+        end
+    end)
+    
+    bypassActive = true
+    print("✅ BYPASS ACTIVATED! SPEED: X6")
+end
+
+-- ========== AUTO UNEQUIP (MUTLAK) ==========
+local autoUnequipConnected = false
+local function setupAutoUnequip()
+    if autoUnequipConnected then return end
+    pcall(function()
+        local char = player.Character or player.CharacterAdded:Wait()
+        local humanoid = char:WaitForChild("Humanoid")
+        humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
+            if humanoid.MoveDirection.Magnitude > 0.1 then
+                unequipTrain()
+            end
+        end)
+        autoUnequipConnected = true
+    end)
+end
+
+-- ========== MEMORY CLEAN (MUTLAK) ==========
+local function quickMemoryClean()
+    pcall(function()
+        collectgarbage("collect")
+        collectgarbage("step")
+    end)
+end
+
+-- ========== VARIABLES (MUTLAK) ==========
+local isRunning = false
+local loopConnection = nil
+local currentSpeed = 512
+local frameCount = 0
+local autoUnequipEnabled = true
+
+-- ========== LOOP (MUTLAK) ==========
+local function startLoop()
+    if isRunning then return end
+    isRunning = true
+    
+    if autoUnequipEnabled then
+        setupAutoUnequip()
+    end
+    
+    loopConnection = runService.Heartbeat:Connect(function()
+        if isRunning then
+            frameCount = frameCount + 2
+            for i = 2, 25 do
+                cachedClick()
+            end
+            cachedUpdateSpeed(currentSpeed)
+            if frameCount % 100 == 0 then
+                quickMemoryClean()
+            end
+        end
+    end)
+    print("🔥 LOOP AKTIF! CLICK: 25x/frame | SPEED: X" .. tostring(currentSpeed))
+end
+
+local function stopLoop()
+    isRunning = false
+    if loopConnection then
+        loopConnection:Disconnect()
+        loopConnection = nil
+    end
+    unequipTrain()
+    print("⏹ LOOP STOP")
+end
+
+-- ========== ANTI-LAG SYSTEM ==========
+local antiLagActive = false
+local function toggleAntiLag(state)
+    antiLagActive = state
+    pcall(function()
+        local lighting = game:GetService("Lighting")
+        if state then
+            lighting.GlobalShadows = false
+            lighting.FogEnd = 9e9
+            settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+        else
+            lighting.GlobalShadows = true
+            lighting.FogEnd = 1000
+            settings().Rendering.QualityLevel = Enum.QualityLevel.Automatic
+        end
+
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if state then
+                if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Fire") or obj:IsA("Sparkles") then
+                    obj.Enabled = false
+                elseif obj:IsA("PostEffect") or obj:IsA("BloomEffect") or obj:IsA("BlurEffect") or obj:IsA("ColorCorrectionEffect") or obj:IsA("SunRaysEffect") then
+                    obj.Enabled = false
+                elseif obj:IsA("BasePart") and not obj.Parent:FindFirstChildOfClass("Humanoid") then
+                    if obj:IsA("MeshPart") or obj:IsA("UnionOperation") then
+                        obj.Material = Enum.Material.SmoothPlastic
+                    end
+                    obj.CastShadow = false
+                end
+            else
+                if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Fire") or obj:IsA("Sparkles") then
+                    obj.Enabled = true
+                elseif obj:IsA("PostEffect") or obj:IsA("BloomEffect") or obj:IsA("BlurEffect") or obj:IsA("ColorCorrectionEffect") or obj:IsA("SunRaysEffect") then
+                    obj.Enabled = true
+                elseif obj:IsA("BasePart") then
+                    obj.CastShadow = true
+                end
+            end
+        end
+    end)
+    print("Anti-Lag State: " .. tostring(state))
+end
+
+
+-- ==================== NEW COMPACT MINI-SPLIT GUI ====================
+local gui = Instance.new("ScreenGui")
+gui.Name = "LilyVL_Pro_Mini"
+gui.Parent = player:WaitForChild("PlayerGui")
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Main Container Frame (Kecil & Ringkas: 320 x 230)
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 320, 0, 230)
+mainFrame.Position = UDim2.new(0.5, -160, 0.5, -115)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = gui
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 6)
+mainCorner.Parent = mainFrame
+
+-- Red Border
+local mainStroke = Instance.new("UIStroke")
+mainStroke.Thickness = 1.2
+mainStroke.Color = Color3.fromRGB(180, 20, 20)
+mainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+mainStroke.Parent = mainFrame
+
+-- Title Bar (Compact)
+local titleBar = Instance.new("Frame")
+titleBar.Size = UDim2.new(1, 0, 0, 28)
+titleBar.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
+titleBar.BorderSizePixel = 0
+titleBar.Parent = mainFrame
+
+local titleText = Instance.new("TextLabel")
+titleText.Size = UDim2.new(0.6, 0, 1, 0)
+titleText.Position = UDim2.new(0.04, 0, 0, 0)
+titleText.Text = "LILYVL MINI"
+titleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleText.BackgroundTransparency = 1
+titleText.Font = Enum.Font.GothamBold
+titleText.TextSize = 10
+titleText.TextXAlignment = Enum.TextXAlignment.Left
+titleText.Parent = titleBar
+
+-- Control Buttons
+local windowControls = Instance.new("Frame")
+windowControls.Size = UDim2.new(0.35, 0, 1, 0)
+windowControls.Position = UDim2.new(0.65, -6, 0, 0)
+windowControls.BackgroundTransparency = 1
+windowControls.Parent = titleBar
+
+local windowLayout = Instance.new("UIListLayout")
+windowLayout.FillDirection = Enum.FillDirection.Horizontal
+windowLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+windowLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+windowLayout.Padding = UDim.new(0, 4)
+windowLayout.Parent = windowControls
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 18, 0, 18)
+closeBtn.Text = "✕"
+closeBtn.TextColor3 = Color3.fromRGB(180, 180, 180)
+closeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+closeBtn.BorderSizePixel = 0
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 9
+closeBtn.Parent = windowControls
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 3)
+closeCorner.Parent = closeBtn
+
+local minimizeBtn = Instance.new("TextButton")
+minimizeBtn.Size = UDim2.new(0, 18, 0, 18)
+minimizeBtn.Text = "—"
+minimizeBtn.TextColor3 = Color3.fromRGB(180, 180, 180)
+minimizeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+minimizeBtn.BorderSizePixel = 0
+minimizeBtn.Font = Enum.Font.GothamBold
+minimizeBtn.TextSize = 9
+minimizeBtn.Parent = windowControls
+
+local minCorner = Instance.new("UICorner")
+minCorner.CornerRadius = UDim.new(0, 3)
+minCorner.Parent = minimizeBtn
+
+
+-- ==================== MINI SPLIT WINDOW SYSTEM ====================
+local contentContainer = Instance.new("Frame")
+contentContainer.Size = UDim2.new(1, 0, 1, -28)
+contentContainer.Position = UDim2.new(0, 0, 0, 28)
+contentContainer.BackgroundTransparency = 1
+contentContainer.Parent = mainFrame
+
+-- LEFT PANEL (Nav Ramping: Lebar 25%)
+local leftPanel = Instance.new("Frame")
+leftPanel.Size = UDim2.new(0.25, 0, 1, 0)
+leftPanel.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+leftPanel.BorderSizePixel = 0
+leftPanel.Parent = contentContainer
+
+local leftSeparator = Instance.new("Frame")
+leftSeparator.Size = UDim2.new(0, 1, 1, 0)
+leftSeparator.Position = UDim2.new(1, -1, 0, 0)
+leftSeparator.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+leftSeparator.BorderSizePixel = 0
+leftSeparator.Parent = leftPanel
+
+local navLayout = Instance.new("UIListLayout")
+navLayout.Padding = UDim.new(0, 4)
+navLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+navLayout.SortOrder = Enum.SortOrder.LayoutOrder
+navLayout.Parent = leftPanel
+
+local navPadding = Instance.new("UIPadding")
+navPadding.PaddingTop = UDim.new(0, 8)
+navPadding.Parent = leftPanel
+
+-- RIGHT PANEL (Content Canvas Area: Lebar 75%)
+local rightPanel = Instance.new("Frame")
+rightPanel.Size = UDim2.new(0.75, -1, 1, 0)
+rightPanel.Position = UDim2.new(0.25, 0, 0, 0)
+rightPanel.BackgroundTransparency = 1
+rightPanel.Parent = contentContainer
+
+
+-- ==================== TABS CONTAINER ====================
+local mainTabFrame = Instance.new("ScrollingFrame")
+mainTabFrame.Size = UDim2.new(1, 0, 1, 0)
+mainTabFrame.BackgroundTransparency = 1
+mainTabFrame.BorderSizePixel = 0
+mainTabFrame.ScrollBarThickness = 1
+mainTabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+mainTabFrame.Parent = rightPanel
+
+local mainTabLayout = Instance.new("UIListLayout")
+mainTabLayout.Padding = UDim.new(0, 6)
+mainTabLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+mainTabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+mainTabLayout.Parent = mainTabFrame
+
+local mainPadding = Instance.new("UIPadding")
+mainPadding.PaddingTop = UDim.new(0, 6)
+mainPadding.PaddingBottom = UDim.new(0, 6)
+mainPadding.Parent = mainTabFrame
+
+local antilagTabFrame = Instance.new("ScrollingFrame")
+antilagTabFrame.Size = UDim2.new(1, 0, 1, 0)
+antilagTabFrame.BackgroundTransparency = 1
+antilagTabFrame.BorderSizePixel = 0
+antilagTabFrame.ScrollBarThickness = 1
+antilagTabFrame.Visible = false
+antilagTabFrame.Parent = rightPanel
+
+local antilagLayout = Instance.new("UIListLayout")
+antilagLayout.Padding = UDim.new(0, 6)
+antilagLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+antilagLayout.SortOrder = Enum.SortOrder.LayoutOrder
+antilagLayout.Parent = antilagTabFrame
+
+local antilagPadding = Instance.new("UIPadding")
+antilagPadding.PaddingTop = UDim.new(0, 6)
+antilagPadding.PaddingBottom = UDim.new(0, 6)
+antilagPadding.Parent = antilagTabFrame
+
+
+-- ==================== HELPER CREATOR ====================
+local function createButton(text, bg, parent, layoutOrder, height)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.92, 0, 0, height or 24)
+    btn.BackgroundColor3 = bg
+    btn.BorderSizePixel = 0
+    btn.Text = text
+    btn.TextColor3 = Color3.fromRGB(230, 230, 230)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 9
+    btn.LayoutOrder = layoutOrder
+    btn.Parent = parent
+    
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0, 3)
+    c.Parent = btn
+    
+    btn.MouseEnter:Connect(function()
+        tweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = bg:Lerp(Color3.fromRGB(255, 255, 255), 0.1)}):Play()
+    end)
+    btn.MouseLeave:Connect(function()
+        tweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = bg}):Play()
+    end)
+    
+    return btn
+end
+
+
+-- ==================== TAB NAVIGATION (COMPACT) ====================
+local mainTabNav = createButton("MAIN", Color3.fromRGB(180, 20, 20), leftPanel, 1, 26)
+local antilagTabNav = createButton("LAG", Color3.fromRGB(20, 20, 20), leftPanel, 2, 26)
+
+
+-- ==================== TAB 1: MAIN MENU ====================
+-- Status Bar
+local statusPanel = Instance.new("Frame")
+statusPanel.Size = UDim2.new(0.92, 0, 0, 26)
+statusPanel.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+statusPanel.BorderSizePixel = 0
+statusPanel.LayoutOrder = 1
+statusPanel.Parent = mainTabFrame
+
+local spCorner = Instance.new("UICorner")
+spCorner.CornerRadius = UDim.new(0, 4)
+spCorner.Parent = statusPanel
+
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(0.5, 0, 1, 0)
+statusLabel.Position = UDim2.new(0.05, 0, 0, 0)
+statusLabel.Text = "⚡ OFF"
+statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 9
+statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+statusLabel.Parent = statusPanel
+
+local speedLabel = Instance.new("TextLabel")
+speedLabel.Size = UDim2.new(0.45, 0, 1, 0)
+speedLabel.Position = UDim2.new(0.5, 0, 0, 0)
+speedLabel.Text = "🔥 SPEED: X6"
+speedLabel.TextColor3 = Color3.fromRGB(180, 20, 20)
+speedLabel.BackgroundTransparency = 1
+speedLabel.Font = Enum.Font.GothamBold
+speedLabel.TextSize = 9
+speedLabel.TextXAlignment = Enum.TextXAlignment.Right
+speedLabel.Parent = statusPanel
+
+-- START Button
+local startBtn = createButton("▶ START", Color3.fromRGB(140, 20, 20), mainTabFrame, 2, 28)
+
+-- Bypass, Unequip Row
+local row1 = Instance.new("Frame")
+row1.Size = UDim2.new(0.92, 0, 0, 24)
+row1.BackgroundTransparency = 1
+row1.LayoutOrder = 3
+row1.Parent = mainTabFrame
+
+local row1Layout = Instance.new("UIListLayout")
+row1Layout.FillDirection = Enum.FillDirection.Horizontal
+row1Layout.Padding = UDim.new(0, 4)
+row1Layout.Parent = row1
+
+local bypassBtn = createButton("💀 BYPASS", Color3.fromRGB(20, 20, 20), row1, 1, 24)
+bypassBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+local unequipBtn = createButton("⏹ UNEQ", Color3.fromRGB(20, 20, 20), row1, 2, 24)
+unequipBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+-- Equip Grid Row (Very Compact)
+local row2 = Instance.new("Frame")
+row2.Size = UDim2.new(0.92, 0, 0, 22)
+row2.BackgroundTransparency = 1
+row2.LayoutOrder = 4
+row2.Parent = mainTabFrame
+
+local row2Layout = Instance.new("UIListLayout")
+row2Layout.FillDirection = Enum.FillDirection.Horizontal
+row2Layout.Padding = UDim.new(0, 3)
+row2Layout.Parent = row2
+
+local equipBtns = {}
+local equipIds = {5, 6, 7, 8}
+for i, id in pairs(equipIds) do
+    local eqBtn = createButton(tostring(id), Color3.fromRGB(15, 15, 15), row2, i, 22)
+    eqBtn.Size = UDim2.new(0.25, -2, 1, 0)
+    
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 0.8
+    stroke.Color = Color3.fromRGB(30, 30, 30)
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    stroke.Parent = eqBtn
+    
+    equipBtns[id] = {btn = eqBtn, stroke = stroke}
+end
+
+-- Refresh, Memory Row
+local row3 = Instance.new("Frame")
+row3.Size = UDim2.new(0.92, 0, 0, 24)
+row3.BackgroundTransparency = 1
+row3.LayoutOrder = 5
+row3.Parent = mainTabFrame
+
+local row3Layout = Instance.new("UIListLayout")
+row3Layout.FillDirection = Enum.FillDirection.Horizontal
+row3Layout.Padding = UDim.new(0, 4)
+row3Layout.Parent = row3
+
+local refreshBtn = createButton("🔄 REFRESH", Color3.fromRGB(20, 20, 20), row3, 1, 24)
+refreshBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+local memBtn = createButton("🧹 MEMORY", Color3.fromRGB(20, 20, 20), row3, 2, 24)
+memBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+-- Auto Unequip Button
+local autoUnequipBtn = createButton("🔓 AUTO UNEQUIP ON", Color3.fromRGB(140, 20, 20), mainTabFrame, 6, 24)
+
+-- Rejoin, Leave Row
+local row4 = Instance.new("Frame")
+row4.Size = UDim2.new(0.92, 0, 0, 24)
+row4.BackgroundTransparency = 1
+row4.LayoutOrder = 7
+row4.Parent = mainTabFrame
+
+local row4Layout = Instance.new("UIListLayout")
+row4Layout.FillDirection = Enum.FillDirection.Horizontal
+row4Layout.Padding = UDim.new(0, 4)
+row4Layout.Parent = row4
+
+local rejoinBtn = createButton("🔄 REJOIN", Color3.fromRGB(20, 20, 20), row4, 1, 24)
+rejoinBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+local leaveBtn = createButton("🚪 LEAVE", Color3.fromRGB(20, 20, 20), row4, 2, 24)
+leaveBtn.Size = UDim2.new(0.5, -2, 1, 0)
+
+
+-- ==================== TAB 2: ANTI-LAG MENU ====================
+local statusPanelAntiLag = Instance.new("Frame")
+statusPanelAntiLag.Size = UDim2.new(0.92, 0, 0, 26)
+statusPanelAntiLag.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+statusPanelAntiLag.BorderSizePixel = 0
+statusPanelAntiLag.LayoutOrder = 1
+statusPanelAntiLag.Parent = antilagTabFrame
+
+local spAntiLagCorner = Instance.new("UICorner")
+spAntiLagCorner.CornerRadius = UDim.new(0, 4)
+spAntiLagCorner.Parent = statusPanelAntiLag
+
+local antiLagStatusLabel = Instance.new("TextLabel")
+antiLagStatusLabel.Size = UDim2.new(1, 0, 1, 0)
+antiLagStatusLabel.Position = UDim2.new(0.05, 0, 0, 0)
+antiLagStatusLabel.Text = "🛡️ STATUS: INACTIVE"
+antiLagStatusLabel.TextColor3 = Color3.fromRGB(250, 50, 50)
+antiLagStatusLabel.BackgroundTransparency = 1
+antiLagStatusLabel.Font = Enum.Font.GothamBold
+antiLagStatusLabel.TextSize = 9
+antiLagStatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+antiLagStatusLabel.Parent = statusPanelAntiLag
+
+-- Boost & Clean Buttons (Ramping)
+local fpsBoostBtn = createButton("🚀 ACTIVATE FPS BOOST", Color3.fromRGB(20, 20, 20), antilagTabFrame, 2, 28)
+local clearGfxBtn = createButton("⚡ CLEAR VFX / PARTICLES", Color3.fromRGB(20, 20, 20), antilagTabFrame, 3, 28)
+local clearTexturesBtn = createButton("🧱 SIMPLIFY TEXTURES", Color3.fromRGB(20, 20, 20), antilagTabFrame, 4, 28)
+
+
+-- Footer Info (Nav)
+local verLabel = Instance.new("TextLabel")
+verLabel.Size = UDim2.new(0.9, 0, 0, 15)
+verLabel.Position = UDim2.new(0.05, 0, 1, -18)
+verLabel.Text = "LILYVL PRO v2"
+verLabel.TextColor3 = Color3.fromRGB(80, 80, 80)
+verLabel.BackgroundTransparency = 1
+verLabel.Font = Enum.Font.GothamBold
+verLabel.TextSize = 7
+verLabel.TextXAlignment = Enum.TextXAlignment.Center
+verLabel.Parent = leftPanel
+
+
+-- ==================== TAB NAVIGATION LOGIC ====================
+mainTabNav.MouseButton1Click:Connect(function()
+    mainTabFrame.Visible = true
+    antilagTabFrame.Visible = false
+    mainTabNav.BackgroundColor3 = Color3.fromRGB(180, 20, 20)
+    antilagTabNav.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+end)
+
+antilagTabNav.MouseButton1Click:Connect(function()
+    mainTabFrame.Visible = false
+    antilagTabFrame.Visible = true
+    antilagTabNav.BackgroundColor3 = Color3.fromRGB(180, 20, 20)
+    mainTabNav.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+end)
+
+
+-- ==================== INTERACTION ACTIONS (MUTLAK) ====================
+local active = false
+
+startBtn.MouseButton1Click:Connect(function()
+    active = not active
+    if active then
+        startLoop()
+        startBtn.Text = "⏹ STOP"
+        startBtn.BackgroundColor3 = Color3.fromRGB(80, 20, 20)
+        statusLabel.Text = "⚡ ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        stopLoop()
+        startBtn.Text = "▶ START"
+        startBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+        statusLabel.Text = "⚡ OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+bypassBtn.MouseButton1Click:Connect(function()
+    if not bypassActive then
+        doBypass()
+        bypassBtn.Text = "💀 ON"
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+        speedLabel.Text = "🔥 SPEED: X6"
+    else
+        bypassActive = false
+        bypassBtn.Text = "💀 BYPASS"
+        bypassBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        speedLabel.Text = "🔥 SPEED: X6"
+    end
+end)
+
+unequipBtn.MouseButton1Click:Connect(function()
+    unequipTrain()
+    statusLabel.Text = "⚡ UNEQ"
+    statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    task.wait(0.3)
+    if active then
+        statusLabel.Text = "⚡ ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        statusLabel.Text = "⚡ OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+for id, item in pairs(equipBtns) do
+    item.btn.MouseButton1Click:Connect(function()
+        cachedEquip(id)
+        for _, other in pairs(equipBtns) do
+            other.stroke.Color = Color3.fromRGB(30, 30, 30)
+            other.btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+        end
+        item.stroke.Color = Color3.fromRGB(180, 20, 20)
+        item.btn.BackgroundColor3 = Color3.fromRGB(35, 15, 15)
+    end)
+end
+
+refreshBtn.MouseButton1Click:Connect(function()
+    statusLabel.Text = "⚡ OK"
+    statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    task.wait(0.3)
+    if active then
+        statusLabel.Text = "⚡ ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        statusLabel.Text = "⚡ OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+memBtn.MouseButton1Click:Connect(function()
+    statusLabel.Text = "⚡ MEM"
+    statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    quickMemoryClean()
+    statusLabel.Text = "⚡ DONE"
+    statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    task.wait(0.3)
+    if active then
+        statusLabel.Text = "⚡ ON"
+        statusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        statusLabel.Text = "⚡ OFF"
+        statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+    end
+end)
+
+autoUnequipBtn.MouseButton1Click:Connect(function()
+    autoUnequipEnabled = not autoUnequipEnabled
+    if autoUnequipEnabled then
+        autoUnequipBtn.Text = "🔓 AUTO UNEQUIP ON"
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+        setupAutoUnequip()
+    else
+        autoUnequipBtn.Text = "🔒 AUTO UNEQUIP OFF"
+        autoUnequipBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        autoUnequipConnected = false
+    end
+end)
+
+leaveBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    task.wait(0.3)
+    player:Kick("Leave")
+end)
+
+rejoinBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    task.wait(0.3)
+    game:GetService("TeleportService"):Teleport(game.PlaceId, player)
+end)
+
+
+-- ==================== ANTI-LAG ACTIONS ====================
+local fpsBoostActive = false
+fpsBoostBtn.MouseButton1Click:Connect(function()
+    fpsBoostActive = not fpsBoostActive
+    toggleAntiLag(fpsBoostActive)
+    
+    if fpsBoostActive then
+        fpsBoostBtn.Text = "🚀 FPS BOOST: ACTIVE"
+        fpsBoostBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+        antiLagStatusLabel.Text = "🛡️ STATUS: BOOSTED!"
+        antiLagStatusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        fpsBoostBtn.Text = "🚀 ACTIVATE FPS BOOST"
+        fpsBoostBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        antiLagStatusLabel.Text = "🛡️ STATUS: INACTIVE"
+        antiLagStatusLabel.TextColor3 = Color3.fromRGB(250, 50, 50)
+    end
+end)
+
+clearGfxBtn.MouseButton1Click:Connect(function()
+    clearGfxBtn.Text = "🧹 CLEANING VFX..."
+    clearGfxBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+    pcall(function()
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Sparkles") then
+                obj:Destroy()
+            end
+        end
+    end)
+    task.wait(0.5)
+    clearGfxBtn.Text = "✅ VFX CLEARED"
+    clearGfxBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+end)
+
+clearTexturesBtn.MouseButton1Click:Connect(function()
+    clearTexturesBtn.Text = "🧱 SIMPLIFYING..."
+    clearTexturesBtn.BackgroundColor3 = Color3.fromRGB(140, 20, 20)
+    pcall(function()
+        for _, obj in pairs(workspace:GetDescendants()) do
+            if obj:IsA("Texture") or obj:IsA("Decal") then
+                obj:Destroy()
+            elseif obj:IsA("BasePart") then
+                obj.Material = Enum.Material.SmoothPlastic
+            end
+        end
+    end)
+    task.wait(0.5)
+    clearTexturesBtn.Text = "✅ SIMPLIFIED"
+    clearTexturesBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+end)
+
+
+-- ========== LERP SMOOTH DRAG SYSTEM ==========
+local dragToggle = false
+local dragStart, startPos, dragInput
+
+titleBar.InputBegan:Connect(function(input)
+    if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+        dragToggle = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        
+        input.Changed:Connect(function()
+            if (input.UserInputState == Enum.UserInputState.End) then
+                dragToggle = false
+            end
+        end)
+    end
+end)
+
+titleBar.InputChanged:Connect(function(input)
+    if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        dragInput = input
+    end
+end)
+
+runService.Heartbeat:Connect(function()
+    if dragToggle and dragInput then
+        local delta = dragInput.Position - dragStart
+        local targetPos = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        mainFrame.Position = mainFrame.Position:Lerp(targetPos, 0.25)
+    end
+end)
+
+
+-- ========== MINIMIZE & CLOSE LOGIC ==========
+local isMinimized = false
+
+minimizeBtn.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    if isMinimized then
+        tweenService:Create(mainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 320, 0, 28)}):Play()
+        contentContainer.Visible = false
+        minimizeBtn.Text = "+"
+    else
+        tweenService:Create(mainFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 320, 0, 230)}):Play()
+        task.wait(0.1)
+        contentContainer.Visible = true
+        minimizeBtn.Text = "—"
+    end
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+    stopLoop()
+    gui:Destroy()
+end)
